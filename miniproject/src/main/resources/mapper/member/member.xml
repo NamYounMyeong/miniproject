@@ -14,4 +14,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM  mbr 
 		 WHERE  mbr_id = #{mbrId}
 	</select>
+	
+	<!-- 휴대폰번호 중복 검사 -->
+	<select id="checkTelno" parameterType="String" resultType="MemberDto">
+	  SELECT
+		     *
+	    FROM  mbr
+	   WHERE  mbr_mbl_telno = #{mbrMblTelno}
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="MemberDto">
+	  INSERT
+	(
+	  mbr_id,
+	  mbr_pw,
+	  mbr_nm,
+	  mbr_mbl_telno,
+	  mbr_home_addr,
+	  mbr_home_daddr,
+	  mbr_brdt,
+	  mbr_reg_ymd
+	)
+	  INTO mbr
+	VALUES
+	(
+	  #{mbrId},
+	  #{mbrPw},
+	  #{mbrNm},
+	  #{mbrMblTelno},
+	  #{mbrHomeAddr},
+	  #{mbrHomeDaddr},
+	  #{mbrBrdt},
+	  #{mbrRegYmd}
+	)
+		           
+	</insert>
+	
 </mapper>

@@ -27,4 +27,15 @@ public class MemberRestController {
 		}
 	}
 	
+	@RequestMapping(value="check-telno", method= RequestMethod.POST)
+	public String checkTelno(@RequestParam String mbrMblTelno){
+		MemberDto memberDto = memberDao.checkTelno(mbrMblTelno);
+		if(memberDto != null){
+			return "Y";
+		}
+		else{
+			return "N";
+		}
+	}
+	
 }

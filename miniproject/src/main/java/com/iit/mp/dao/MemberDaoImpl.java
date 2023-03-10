@@ -18,4 +18,16 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.checkId",mbrId);
 	}
 	
+	/* 휴대폰번호 중복 검사 */
+	@Override
+	public MemberDto checkTelno(String mbrMblTelno) {
+		return sqlSession.selectOne("member.checkTelno", mbrMblTelno);
+	}
+	
+	/* 회원가입 */
+	@Override
+	public void memberJoin(MemberDto memberDto) {
+		sqlSession.insert("member.memberJoin", memberDto);
+	}
+	
 }
