@@ -1,0 +1,49 @@
+CREATE table mbr ( /* 회원 테이블 생성 */
+mbr_id varchar2(60) primary key, /* 아이디 */
+mbr_pw varchar2(40) not null, /* 비밀번호 */ /* 암호화 이후 수정 예정 */
+mbr_nm varchar2(300) not null, /* 이름 */
+mbr_mbl_telno char(11) not null unique, /* 휴대전화 번호*/
+mbr_home_addr varchar2(45) not null, /* 기본 주소 */
+mbr_home_daddr varchar2(400) not null, /* 상세 주소 */
+mbr_brdt date not null, /* 생년월일 */
+mbr_reg_ymd date default sysdate /* 가입일자 */
+);
+
+CREATE table atch ( /* 첨부파일 테이블 생성 */
+atch_no number primary key, /* 첨부파일 번호 */
+atch_extn_nm varchar2(5) not null, /* 확장자명 */
+atch_file_nm varchar2(900) not null, /* 첨부파일명 */
+atch_file_sz number not null, /* 파일 크기 */
+atch_strg_ymd date default sysdate /* 저장 일자 */
+);
+
+CREATE table pstg ( /* 게시판 테이블 생성 */
+pstg_no number primary key, /* 게시글 번호 */
+pstg_wrt_id references mbr(mbr_id) on delete set null, /* 게시자 아이디 */
+pstg_wrt_title varchar2(60) not null, /* 게시글 제목 */
+pstg_wrt_cn varchar2(4000) not null, /* 게시글 내용 */
+pstg_wrt_ymd date default sysdate, /* 작성일자 */
+pstg_mdfcn_ymd date, /* 수정일자 */
+pstg_inq_cnt number default 0, /* 조회수 */
+pstg_group number not null, /* 게시글 그룹 */
+pstg_parent references pstg(pstg_no) on delete cascade, /* 부모글 번호 */
+pstg_depth number not null /* 차수 */
+);
+
+CREATE table pstg_img ( /* 게시판-첨부파일 연결 테이블 생성 */
+pstg_img_atch_no references atch(atch_no) on delete set null, /* 첨부파일 번호 */
+pstg_img_pstg_no number references pstg(pstg_no) on delete cascade /* 게시글 번호 */
+);
+
+CREATE table cmnt ( /* 댓글 테이블 생성 */
+cmnt_no number primary key, /* 댓글 번호 */
+cmnt_wrt_nm references mbr(mbr_id) on delete set null, /* 작성자 아이디 */
+cmnt_wrt_ymd date default sysdate, /* 댓글 작성일자 */
+cmnt_mdfcn_ymd date,/*댓글 수정일자*/
+cmnt_wrt_cn varchar2(300), /* 댓글 내용 */
+cmnt_pstg_no references pstg(pstg_no) on delete cascade /* 댓글의 게시글 번호 */
+);
+
+CREATE sequence atch_seq; /* 첨부파일 시퀀스 생성 */
+CREATE sequence pstg_seq; /* 게시판 시퀀스 생성 */
+CREATE sequence cmnt_seq; /* 댓글 시퀀스 생성 */
