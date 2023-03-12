@@ -22,6 +22,7 @@ public class MemberController {
 		return "member/join";
 	}
 	
+	/* 회원가입 */
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.memberJoin(memberDto);

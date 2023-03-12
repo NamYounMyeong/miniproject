@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 회원가입 -->
 	<insert id="memberJoin" parameterType="MemberDto">
-	  INSERT
+	  INSERT into mbr
 	(
 	  mbr_id,
 	  mbr_pw,
@@ -36,8 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  mbr_brdt,
 	  mbr_reg_ymd
 	)
-	  INTO mbr
-	VALUES
+	  VALUES
 	(
 	  #{mbrId},
 	  #{mbrPw},
@@ -46,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  #{mbrHomeAddr},
 	  #{mbrHomeDaddr},
 	  #{mbrBrdt},
-	  #{mbrRegYmd}
+	  sysdate
 	)
 		           
 	</insert>
