@@ -26,12 +26,7 @@ public class MemberController {
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String join(@ModelAttribute MemberDto memberDto) {
 		memberDao.memberJoin(memberDto);
-		return "redirect:login";
-	}
-	/* 로그인 페이지 */
-	@RequestMapping(value="login", method=RequestMethod.GET)
-	public String login(){
-		return "member/login";
+		return "redirect:/login";
 	}
 	
 }

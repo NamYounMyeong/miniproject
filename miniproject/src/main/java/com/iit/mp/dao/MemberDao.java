@@ -10,5 +10,7 @@ public interface MemberDao {
 	MemberDto checkTelno(String mbrMblTelno);
 	/* 회원가입 */
 	void memberJoin(MemberDto memberDto);
+	/* 로그인 */
+	MemberDto loginMember(String mbrId);
 	
 }
