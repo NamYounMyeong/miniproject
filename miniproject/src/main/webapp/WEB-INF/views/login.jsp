@@ -6,9 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<h1>로그인 페이지</h1>
+<div class="wrapper fadeInDown" style="margin-top:150px;">
+	<div id="formContent">
 	<form action="login" method="post">
 		<div>
 			<input name="mbrId" type="text" placeholder="아이디 입력">
@@ -23,7 +26,12 @@
 			<div class="">아이디 혹은 비밀번호가 일치하지 않습니다.</div>
 		</div>
 	</c:if>
+	</div>
+	<div id="formFooter">
+      <a class="underlineHover" href="member/join">회원가입 하기</a>
+    </div>
 	<a href="member/join">회원가입 하기</a>
+</div>
 <script src="//code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 	$(function(){

@@ -4,43 +4,40 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>제목</title>
+    <title>인터페이스 정보기술</title>
     <style>
         #header{            
             width:100%;
             height:50px;
-            text-align: center;
-            background-color: aqua;
+            background-color: #f8f8f8;
         }
         #left{
             float:left;
-             width:15%;
-            background-color: gray;
+            width:10%; 
         }
-        #main{
+        #body{
             float:left;
-             width:85%;
-            background-color: lime;
+            width:90%;
         }
-        #footer{
+       /*  #footer{
             width: 100%;
             height: 50px;            
             text-align: center;
             background-color: orange;
             clear:both;
-        }
-         #left, #main{ 
+        } */
+         #left, #body{ 
                min-height: 600px;
          } 
     </style>
     
 </head>
 <body>
-    <div style="width:100%; height:100%;">
+    <div style="width:100%; height:100%;position:fixed;">
     <div id="header"><tiles:insertAttribute name="header" /></div>
     <div id="left"><tiles:insertAttribute name="left" /></div>
-    <div id="main"><tiles:insertAttribute name="main" /></div>    
-    <div id="footer"><tiles:insertAttribute name="footer" /></div>
+    <div id="body"><tiles:insertAttribute name="body" /></div>    
+    <%-- <div id="footer"><tiles:insertAttribute name="footer" /></div> --%>
     </div>
 </body>
 </html>
