@@ -13,12 +13,17 @@
 		<!-- <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" /> -->
 	</definition>
  
+ 
+ 
  <!-- tiles 미적용 -->
 	<definition name="*" extends="template">
 		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 	
-	<!-- <definition name="./board/*" extends="template">
+	<definition name="./*/*" extends="template">
 		<put-attribute name="body" value="/webapp/WEB-INF/views/{1}/{2}.jsp" />
-	</definition> -->
+	</definition>
+	<definition name="*/*/*" extends="template">
+		<put-attribute name="body" value="/webapp/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
 </tiles-definitions>
