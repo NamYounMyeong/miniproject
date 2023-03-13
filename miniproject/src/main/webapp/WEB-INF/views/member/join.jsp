@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +11,7 @@
 	}
 </style>
 <body>
-	<form action="" method="post" >
+	<form action="join" method="post" class="join-form">
 		<div>
 			<input type="text" name="mbrId" placeholder ="아이디">
 			<div>
@@ -47,10 +46,22 @@
 		</div>
 		<div>
 			<input type="text" name="mbrHomeAddr" placeholder ="주소">
+			<div>
+				<span class="confirm-text"></span>
+			</div>
 			<input type="text" name="mbrHomeDaddr" placeholder ="상세주소">
+			<div>
+				<span class="confirm-text"></span>
+			</div>
 		</div>
 		<div>
-			<button type="submit">가입하기</button>
+			<input type="date" name="mbrBrdt">
+		</div>
+		<div>
+			<button id="submit-btn" type="submit">가입하기</button>
+			<div>
+				<span class="confirm-text"></span>
+			</div>
 		</div>
 	</form>
 	
@@ -62,15 +73,16 @@ $(function(){
 			mbrPwValid: false,
 			mbrPwConfirmValid: false,
 			mbrNmValid: false,
-			mbrTelnoValid: false,
+			mbrMblTelnoValid: false,
 			mbrHomeAddrValid: false,
 			mbrHomeDaddrValid: false,
+			mbrBrdtValid: false,
 			mbrPwRegex: /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[a-zA-Z0-9!@#$]{8,20}$/,
-            mbrTelnoRegex: /^010\d{8}$/,
+            mbrMblTelnoRegex: /^010\d{8}$/,
 			
 			isAllValid: function () {
-				return this.mbrIdValid && this.mbrPwValid && this.mbrPwConfirmValid && this.mbrNmValid && this.mbrTelnoValid
-						&& this.mbrHomeAddrValid && this.mbrHomeDaddrValid;
+				return this.mbrIdValid && this.mbrPwValid && this.mbrPwConfirmValid && this.mbrNmValid && this.mbrMblTelnoValid
+						&& this.mbrHomeAddrValid && this.mbrHomeDaddrValid && this.mbrBrdtValid;
 			}
 			
 	};
@@ -142,6 +154,79 @@ $(function(){
 			validChecking.mbrNmValid = false;
 		}
 	});//이름 입력 확인 end
+	
+	
+	/* 휴대폰번호 확인 */
+	$("[name=mbrMblTelno]").on("blur", function(){
+		var mbrMblTelno = $(this).val();
+		var regex = validChecking.mbrMblTelnoRegex;
+		if(regex.test(mbrMblTelno)) {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/rest/member/check-telno",
+				method: "POST",
+				data: {mbrMblTelno:mbrMblTelno},
+				success: function(resp) {
+					if(resp == "Y"){
+						$("[name=mbrMblTelno]").siblings("div").find(".confirm-text").text("이미 존재하는 휴대전화번호입니다.").css("color","red");
+						validChecking.mbrMblTelnoValid = false;
+					}
+					else {
+						$("[name=mbrMblTelno]").siblings("div").find(".confirm-text").text("");
+						validChecking.mbrMblTelnoValid = true;
+					}
+				}
+			});//ajax end
+		}
+	});
+	
+	
+	/* 주소 입력 확인 */
+	$("[name=mbrHomeAddr]").on("blur", function(){
+		var mbrHomeAddr = $(this).val();
+		if(mbrHomeAddr.length > 0){
+			validChecking.mbrHomeAddrValid = true;
+		}
+		else {
+			validChecking.mbrHomeAddrValid = false;
+		}
+	});//주소 입력 확인 end
+	
+	
+	/* 상세주소 입력 확인 */
+	$("[name=mbrHomeDaddr]").on("blur", function(){
+		var mbrHomeDaddr = $(this).val();
+		if(mbrHomeDaddr.length > 0){
+			validChecking.mbrHomeDaddrValid = true;
+		}
+		else {
+			validChecking.mbrHomeDaddrValid = false;
+		}
+	});// 상세주소 입력 확인 end
+	
+	
+	/* 생년월일 입력 확인 */
+	$("[name=mbrBrdt]").on("blur", function() {
+		var mbrBrdt = $(this).val();
+		if(mbrBrdt.length > 0){
+			validChecking.mbrBrdtValid = true;
+		}
+		else{
+			validChecking.mbrBrdtValid = false;
+		}
+	});//생년월일 입력 확인 end
+	
+	$(".join-form").submit(function(e) {
+		e.preventDefault();
+		
+		if(validChecking.isAllValid()) {
+			this.submit();
+		}
+		else{
+			$("#submit-btn").siblings("div").find(".confirm-text").text("입력사항을 모두 입력해주세요.").css("color","red");
+		}
+		
+	})//join-form submit end
+	
 	
 })
 </script>

@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>로그인 페이지</h1>
-	<a href="join">회원가입 하기</a>
+	<h1>테스트페이지</h1>
 </body>
 </html>

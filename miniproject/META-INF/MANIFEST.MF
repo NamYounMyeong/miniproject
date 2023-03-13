@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: miniproject
+Bundle-SymbolicName: miniproject
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: miniproject.jar,
+ admin/Desktop/WINDOWS.X64_193000_db_home/jdbc/lib/ojdbc8.jar
+Export-Package: com.iit.mp.configuration,
+ com.iit.mp.controller,
+ com.iit.mp.dao,
+ com.iit.mp.dto,
+ com.iit.mp.restcontroller,
+ com.iit.mp.service,
+ com.iit.mp.vo

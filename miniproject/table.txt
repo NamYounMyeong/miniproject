@@ -1,6 +1,6 @@
 CREATE table mbr ( /* 회원 테이블 생성 */
 mbr_id varchar2(60) primary key, /* 아이디 */
-mbr_pw varchar2(40) not null, /* 비밀번호 */ /* 암호화 이후 수정 예정 */
+mbr_pw varchar2(100) not null, /* 비밀번호 */
 mbr_nm varchar2(300) not null, /* 이름 */
 mbr_mbl_telno char(11) not null unique, /* 휴대전화 번호*/
 mbr_home_addr varchar2(45) not null, /* 기본 주소 */
