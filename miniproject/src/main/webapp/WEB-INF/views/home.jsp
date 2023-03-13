@@ -16,6 +16,6 @@
 		<a href="/logout">로그아웃</a>
  	</c:otherwise>
  </c:choose>
-
+<a href="/test">테스트페이지</a>
 </body>
 </html>

@@ -58,7 +58,10 @@
 			<input type="date" name="mbrBrdt">
 		</div>
 		<div>
-			<button type="submit">가입하기</button>
+			<button id="submit-btn" type="submit">가입하기</button>
+			<div>
+				<span class="confirm-text"></span>
+			</div>
 		</div>
 	</form>
 	
@@ -217,6 +220,9 @@ $(function(){
 		
 		if(validChecking.isAllValid()) {
 			this.submit();
+		}
+		else{
+			$("#submit-btn").siblings("div").find(".confirm-text").text("입력사항을 모두 입력해주세요.").css("color","red");
 		}
 		
 	})//join-form submit end
