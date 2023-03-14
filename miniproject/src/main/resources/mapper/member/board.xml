@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<!-- 게시글 단일 조회 -->
+	<select id="detail" parameterType="int" resultType="boardDto">
+		SELECT 	
+		        pstg_no, 
+		        pstg_wrt_id, 
+		        pstg_wrt_title, 
+		        pstg_wrt_cn, 
+		        pstg_wrt_ymd, 
+		        pstg_inq_cnt 
+		  FROM  pstg
+		 WHERE  pstg_no = #{pstgNo}
+	</select>
+	
+	<select id="selectReplyList" resultType="ReplyDto" parameterType="int">
+		SELECT
+		        *
+		  FROM cmnt
+	  ORDER BY cmnt_wrt_ymd desc
+	</select>
+	
+	<!-- 댓글 리스트 계층형 조회 -->
+	<resultMap type="BoardDetailVO" id="boardDetail">
+		<association property="boardDto">
+			<result column="pstg_no" property="pstgNo"/>
+			<result column="pstg_wrt_id" property="pstgWrtId"/>
+			<result column="pstg_wrt_title" property="pstgWrtTitle"/>
+			<result column="pstg_wrt_cn" property="pstgWrtCn"/>
+			<result column="pstg_wrt_ymd" property="pstgWrtYmd"/>
+			<result column="pstg_mdfcn_ymd" property="pstgMdfcnYmd"/>
+			<result column="pstg_inq_cnt" property="pstgInqCnt"/>
+			<result column="pstg_group" property="pstgGroup"/>
+			<result column="pstg_parent" property="pstgParent"/>
+			<result column="pstg_depth" property="pstgDepth"/>
+		</association>
+		
+		<collection property="replyList" javaType="java.util.List" ofType="ReplyDto" select="selectReplyList" column="cmnt_pstg_no">
+			<result column="cmnt_no" property="cmntNo"/>
+			<result column="cmnt_wrt_nm" property="cmntWrtNm"/>
+			<result column="cmnt_wrt_ymd" property="cmntWrtYmd"/>
+			<result column="cmnt_mdfcn_ymd" property="cmntMdfcnYmd"/>
+			<result column="cmnt_wrt_cn" property="cmntWrtCn"/>
+			<result column="cmnt_pstg_no" property="cmntPstgNo"/>
+		</collection>
+	</resultMap>
+
+</mapper>

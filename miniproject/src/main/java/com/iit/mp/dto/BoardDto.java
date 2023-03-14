@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class BoardDto {
 	private String pstgWrtId, pstgWrtTitle, pstgWrtCn;
-	private Number pstgNo, pstgInqCnt, pstgGroup, pstgDepth, pstgParent;
+	private int pstgNo, pstgInqCnt, pstgGroup, pstgDepth, pstgParent;
 	private Date pstgWrtYmd, pstgMdfcnYmd;
 }
