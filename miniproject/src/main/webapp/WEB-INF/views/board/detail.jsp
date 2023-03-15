@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <style>
-	.detail_view {
+	.detail-view {
 		display: none;
 		overflow-y: scroll;
 	}
@@ -23,31 +23,31 @@
 		bottom: 0;
 	}
 	
-	.detail_top_area {
+	.detail-top-area {
 		top: 0;
 		display: flex;
 		justify-content: flex-end;
 	}
 	
-	.detail_middle_area {
+	.detail-middle-area {
 	}
 	
-	.detail_bottom_area {
+	.detail-bottom-area {
 		bottom: 0;
 	}
 	
-	.context_box {
+	.context-box {
 		min-height: 600px;
 	}
-	.title_box {
+	.title-box {
 		display: flex;
 		justify-content: space-between;
 	}
-	.title_box>div:nth-child(2) {
+	.title-box>div:nth-child(2) {
 		display: flex;
 	}
 	
-	.title_box > div:nth-child(2) > div {
+	.title-box > div:nth-child(2) > div {
 		margin-right: 10px;
 	}
 	
@@ -64,20 +64,20 @@
 	</div>
 	<div>
 		<p>div 형식</p>
-		<button data-num="2" class="view_btn">상세보기</button>
-		<button data-num="3" class="view_btn">상세보기</button>
-		<button data-num="4" class="view_btn">상세보기</button>
-		<button data-num="5" class="view_btn">상세보기</button>
-		<button data-num="6" class="view_btn">상세보기</button>
+		<button data-num="2" class="view-btn">상세보기</button>
+		<button data-num="3" class="view-btn">상세보기</button>
+		<button data-num="4" class="view-btn">상세보기</button>
+		<button data-num="5" class="view-btn">상세보기</button>
+		<button data-num="6" class="view-btn">상세보기</button>
 	</div>
 	
-	<!-- detail_view div 시작 -->
-	<div class="detail_view">
-		<div class="detail_top_area">
-			<button class="close_btn">닫기</button>
+	<!-- detail-view div 시작 -->
+	<div class="detail-view">
+		<div class="detail-top-area">
+			<button class="close-btn">닫기</button>
 		</div>
-		<div class="detail_middle_area">
-			<div class="title_box">
+		<div class="detail-middle-area">
+			<div class="title-box">
 				<div>
 					<span>제목</span>
 					<span id="title"></span>
@@ -93,19 +93,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="context_box">
+			<div class="context-box">
 				게시글 내용
 				<div id="content"></div>
 			</div>
 		</div>
-		<div class="detail_bottom_area">
+		<div class="detail-bottom-area">
 			<div>
 				<div>
 					첨부파일 목록
 				</div>
 				<div>
 					<span>작성시간</span>
-					<span id="write_time"></span>
+					<span id="write-time"></span>
 				</div>
 			</div>
 		</div>
@@ -114,9 +114,9 @@
 <script type="text/javascript">
 $(function(){
 	//상세페이지 열기
-	$(".view_btn").click(function(){
+	$(".view-btn").click(function(){
 		var pstgNo = $(this).attr("data-num");
-		$(".detail_view").addClass("on");
+		$(".detail-view").addClass("on");
 		
 		$.ajax({
 			url: "${pageContext.request.contextPath}/rest/board/detail",
@@ -129,18 +129,18 @@ $(function(){
 				$("#writer").text(resp.pstgWrtId);
 				$("#content").text(resp.pstgWrtCn);
 				if(resp.pstgMdfcnYmd == null) {
-					$("#write_time").text(resp.pstgWrtYmd);
+					$("#write-time").text(resp.pstgWrtYmd);
 				}
 				else {
-					$("#write_time").text(resp.pstgMdfcnYmd);
+					$("#write-time").text(resp.pstgMdfcnYmd);
 				}
 			}
 		});//ajax end
 		
 	});
 	//상세페이지 닫기
-	$(".close_btn").click(function() {
-		$(".detail_view").removeClass("on");
+	$(".close-btn").click(function() {
+		$(".detail-view").removeClass("on");
 	});
 });
 </script>

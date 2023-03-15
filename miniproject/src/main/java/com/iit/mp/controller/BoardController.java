@@ -51,9 +51,10 @@ public class BoardController {
 	//게시글 상세페이지2
 	@RequestMapping(value="detail2", method = RequestMethod.GET)
 	public String boardDetail2(@RequestParam int pstgNo, Model model){
-		model.addAttribute("detail", boardDao.detailView(pstgNo));
+//		model.addAttribute("detail", boardDao.detailView(pstgNo));
 //		System.out.println("No: "+pstgNo);
 //		System.out.println("dao: "+boardDao.detailView(pstgNo));
+		model.addAttribute("boardDetail", boardDao.boardDetail(pstgNo));
 		return "board/detail2";
 	}
 	

@@ -2,23 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 	<!-- 게시글 단일 조회 -->
-	<select id="detail" parameterType="int" resultType="boardDto">
-		SELECT 	
-		        pstg_no, 
-		        pstg_wrt_id, 
-		        pstg_wrt_title, 
-		        pstg_wrt_cn, 
-		        pstg_wrt_ymd, 
-		        pstg_inq_cnt 
-		  FROM  pstg
-		 WHERE  pstg_no = #{pstgNo}
+	<select id="detail" parameterType="int" resultMap="boardDetail">
+	  SELECT 	
+		      pstg_no, 
+		      pstg_wrt_id, 
+		      pstg_wrt_title, 
+		      pstg_wrt_cn, 
+		      pstg_wrt_ymd, 
+		      pstg_inq_cnt 
+		FROM  pstg
+	   WHERE  pstg_no = #{pstgNo}
 	</select>
 	
 	<select id="selectReplyList" resultType="ReplyDto" parameterType="int">
-		SELECT
+	  SELECT
 		        *
-		  FROM cmnt
-	  ORDER BY cmnt_wrt_ymd desc
+		FROM cmnt
+	   WHERE cmnt_pstg_no = #{pstgNo}
+	   ORDER BY cmnt_wrt_ymd asc
 	</select>
 	
 	<!-- 댓글 리스트 계층형 조회 -->
@@ -36,7 +37,7 @@
 			<result column="pstg_depth" property="pstgDepth"/>
 		</association>
 		
-		<collection property="replyList" javaType="java.util.List" ofType="ReplyDto" select="selectReplyList" column="cmnt_pstg_no">
+		<collection property="replyList" javaType="java.util.List" ofType="ReplyDto" select="selectReplyList" column="pstg_no">
 			<result column="cmnt_no" property="cmntNo"/>
 			<result column="cmnt_wrt_nm" property="cmntWrtNm"/>
 			<result column="cmnt_wrt_ymd" property="cmntWrtYmd"/>
@@ -45,5 +46,39 @@
 			<result column="cmnt_pstg_no" property="cmntPstgNo"/>
 		</collection>
 	</resultMap>
+	
+	<!-- 댓글 작성 -->
+	<insert id="replyWrite" parameterType="ReplyDto">
+	  INSERT into cmnt
+	(
+	  cmnt_no, 
+	  cmnt_wrt_nm, 
+	  cmnt_wrt_ymd, 
+	  cmnt_wrt_cn, 
+	  cmnt_pstg_no
+	) 
+	  VALUES
+	(
+	  cmnt_seq.nextval, 
+	  #{cmntWrtNm}, 
+	  sysdate, 
+	  #{cmntWrtCn}, 
+	  #{cmntPstgNo}
+	)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply" parameterType="int">
+	  DELETE  cmnt
+	   WHERE  cmnt_no = #{cmntNo}
+	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="ReplyDto">
+	  UPDATE  cmnt
+	     SET  cmnt_wrt_cn = #{cmntWrtCn},
+	          cmnt_mdfcn_ymd = sysdate
+	   WHERE  cmnt_no = #{cmntNo}
+	</update>
 
 </mapper>
