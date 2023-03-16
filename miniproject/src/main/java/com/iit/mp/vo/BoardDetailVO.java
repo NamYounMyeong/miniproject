@@ -2,7 +2,7 @@ package com.iit.mp.vo;
 
 import java.util.List;
 
-import com.iit.mp.dto.AtchDto;
+import com.iit.mp.dto.AttachmentDto;
 import com.iit.mp.dto.BoardDto;
 import com.iit.mp.dto.ReplyDto;
 
@@ -15,5 +15,5 @@ import lombok.NoArgsConstructor;
 public class BoardDetailVO {
 	private BoardDto boardDto;
 	private List<ReplyDto> replyList;
-	private List<AtchDto> atchList;
+	private List<AttachmentDto> atchList;
 }
