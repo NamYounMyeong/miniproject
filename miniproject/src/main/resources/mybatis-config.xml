@@ -10,6 +10,7 @@
 	    <typeAlias type="com.iit.mp.dto.MemberDto" alias="MemberDto"/>
 	    <typeAlias type="com.iit.mp.dto.BoardDto" alias="BoardDto"/>
 	    <typeAlias type="com.iit.mp.dto.ReplyDto" alias="ReplyDto"/>
+	    <typeAlias type="com.iit.mp.dto.AtchDto" alias="AtchDto"/>
 	    <typeAlias type="com.iit.mp.vo.BoardDetailVO" alias="BoardDetailVO"/>
 	</typeAliases>
 </configuration>

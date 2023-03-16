@@ -42,14 +42,17 @@ public class BoardRestController {
 	}
 	
 	//댓글 삭제
-	@RequestMapping(value = "reply-delete", method = RequestMethod.DELETE)
-	public List<ReplyDto> deleteReply(@RequestParam int cmntNo, @RequestParam int pstgNo) {
+	@RequestMapping(value = "reply-delete", method = RequestMethod.GET)
+	public boolean deleteReply(@RequestParam int cmntNo) {
 		// 다시 댓글 리스트를 보여줘야 하므로 댓글 번호와 글 번호 모두 받아와야한다.
-		boardDao.deleteReply(cmntNo);
-		return boardDao.replyList(pstgNo);
+		return boardDao.deleteReply(cmntNo);
 	}
 	
 	//댓글 수정
+	@RequestMapping(value = "reply-update", method = RequestMethod.POST)
+	public boolean updateReply(@RequestBody ReplyDto replyDto) {
+		return boardDao.updateReply(replyDto);
+	}
 	
 	
 }

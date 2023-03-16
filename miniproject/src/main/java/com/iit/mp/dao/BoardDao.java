@@ -8,8 +8,6 @@ import com.iit.mp.vo.BoardDetailVO;
 
 public interface BoardDao {
 	//게시글 상세페이지
-//	BoardDto detailView(int pstgNo);
-	//게시글 상세페이지
 	BoardDetailVO boardDetail(int pstgNo);
 	//댓글 등록
 	void replyWrite(ReplyDto replyDto);

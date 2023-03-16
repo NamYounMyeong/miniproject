@@ -15,7 +15,6 @@
 		<a href="/logout">로그아웃</a>
  	</c:otherwise>
  </c:choose>
-<a href="/test">테스트페이지</a>
-<a href="board/detail">디테일페이지</a>
+<a href="board/list">디테일페이지</a>
 </body>
 </html>

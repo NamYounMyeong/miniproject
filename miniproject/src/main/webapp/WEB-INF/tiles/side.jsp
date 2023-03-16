@@ -29,8 +29,8 @@
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                           <li><a href="member/login">로그인</a></li>
-                           <li><a href="member/join">회원가입</a></li>
+                           <li><a href="/login">로그인</a></li>
+                           <li><a href="/member/join">회원가입</a></li>
 
                             <!--     Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">

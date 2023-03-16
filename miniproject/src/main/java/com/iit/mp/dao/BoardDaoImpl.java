@@ -17,12 +17,6 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSession sqlSession;
 	
 	//게시글 상세페이지
-//	@Override
-//	public BoardDto detailView(int pstgNo) {
-//		return sqlSession.selectOne("board.detail", pstgNo);
-//	}
-	
-	//게시글 상세페이지
 	@Override
 	public BoardDetailVO boardDetail(int pstgNo) {
 		return sqlSession.selectOne("board.detail", pstgNo);
