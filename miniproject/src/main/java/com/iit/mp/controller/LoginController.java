@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.iit.mp.dao.MemberDao;
 import com.iit.mp.dto.MemberDto;
-import com.iit.mp.security.SecurityUserVO;
+import com.iit.mp.security.CustomUserDetailService;
+import com.iit.mp.security.PrincipalDetails;
 
 @Controller
 public class LoginController {
@@ -21,6 +22,9 @@ public class LoginController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
+	
 	/* 로그인 */
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login(){
@@ -29,12 +33,11 @@ public class LoginController {
 	
 	//로그인
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(HttpSession session, @ModelAttribute SecurityUserVO inputDto) {
+	public String login(HttpSession session, @ModelAttribute MemberDto inputDto) {
 //		MemberDto findDto = memberDao.loginMember(inputDto.getMbrId());
-		System.err.println("컨트롤러");
-		SecurityUserVO findDto = memberDao.loginMember(inputDto.getMbrId());
-		System.out.println("find: "+findDto);
-		System.out.println("input: "+inputDto);
+		MemberDto findDto = memberDao.loginMember(inputDto.getMbrId());
+		customUserDetailService.loadUserByUsername(findDto.getMbrId());
+		
 		if(findDto == null) {
 			return "redirect:login?error";
 		}

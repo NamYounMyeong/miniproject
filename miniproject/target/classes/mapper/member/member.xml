@@ -45,7 +45,7 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="String" resultType="SecurityUserVO">
+	<select id="login" parameterType="String" resultType="MemberDto">
 	  SELECT
 	          mbr_id,
 	          mbr_pw,

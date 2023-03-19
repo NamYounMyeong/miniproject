@@ -1,4 +1,4 @@
-/*package com.iit.mp.configuration;
+package com.iit.mp.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,27 +17,17 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private AuthenticationSuccessHandler authenticationSuccessHandler;
-	
-	@Autowired
-	private AuthenticationFailureHandler authenticationFailureHandler;
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//다음 경로에 대한 요청은 인증 없이 접근을 허용하도록 설정
 		http.authorizeRequests().antMatchers("/", "/member/join", "/login").permitAll();
 		// 위의 경로 외에는 모두 인증을 하도록 설정
-		http.authorizeRequests().anyRequest().authenticated();
+		http.authorizeRequests().anyRequest().authenticated().antMatchers("/board/**").access("mbrRgd('')");
 		//사용자 정의 로그인 화면에서 CSRF 토큰을 전달하지 않는 설정
 		http.csrf().disable();
 		//로그인 화면 설정
-		http.formLogin().loginPage("/login");
+		http.formLogin().loginPage("/login").usernameParameter("mbrId").passwordParameter("mbrPw");
 		//로그인 성공시 이동할 페이지 설정
 		http.formLogin().defaultSuccessUrl("/");
 		//로그아웃
@@ -52,4 +42,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 }
-*/

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.iit.mp.dao.MemberDao;
 import com.iit.mp.dto.MemberDto;
 
-@Service("CustomUserDetailsService")
+@Service
 public class CustomUserDetailService implements UserDetailsService {
 	
 	@Autowired
@@ -21,13 +21,10 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String mbrId) throws UsernameNotFoundException {
-		System.err.println("서비스 mbrId: "+mbrId);
-		SecurityUserVO user = memberDao.loginMember(mbrId);
-		System.err.println("서비스 user: "+user);
+		MemberDto user = memberDao.loginMember(mbrId);
 		if(user != null) {
-			return user;
+			return new PrincipalDetails(user);
 		}
-		
 		return null;
 	}
 	
