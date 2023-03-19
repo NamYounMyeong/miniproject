@@ -5,21 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<h1>로그인 페이지</h1>
-<div class="wrapper fadeInDown" style="margin-top:150px;">
-	<div id="formContent">
+<div class="container-300 screen-center">
+	<div>
 	<form action="login" method="post">
-		<div>
-			<input name="mbrId" type="text" placeholder="아이디 입력">
+		<div class="row">
+			<input class="w-100 login-input" name="mbrId" type="text" placeholder="아이디 입력">
 		</div>
-		<div>
-			<input name="mbrPw" type="password" placeholder="비밀번호 입력">
+		<div class="row">
+			<input class="w-100 login-input" name="mbrPw" type="password" placeholder="비밀번호 입력">
 		</div>
-		<button type="submit">로그인</button>
+		<div class="row login-btn-box">
+			<button class="w-100" type="submit">로그인</button>
+		</div>
 	</form>
 	<c:if test="${param.error != null}">
 		<div class="">
@@ -27,10 +29,9 @@
 		</div>
 	</c:if>
 	</div>
-	<div id="formFooter">
-      <a class="underlineHover" href="member/join">회원가입 하기</a>
+	<div>
+    	<a class="move-join-btn w-100" href="member/join">회원가입 하기</a>
     </div>
-	<a href="member/join">회원가입 하기</a>
 </div>
 </body>
 </html>

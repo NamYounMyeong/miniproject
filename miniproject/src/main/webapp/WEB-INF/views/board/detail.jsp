@@ -5,18 +5,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>상세페이지</title>
 </head>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/board_detail.css">
 <body>
-	<h1>게시글 상세페이지</h1>
-	<div class="detail-view">
+	<div class="detail-view container-1000">
 		<div class="detail-top-area">
 			<a href="list">목록으로</a>
 		</div>
 		<div class="detail-middle-area">
 			<div class="title-box">
-				<div>
+				<div class="board-title">
 					<span>제목</span>
 					<span>${boardDetail.boardDto.pstgWrtTitle}</span>
 				</div>
@@ -32,7 +32,6 @@
 				</div>
 			</div>
 			<div class="context-box">
-				게시글 내용
 				<div>${boardDetail.boardDto.pstgWrtCn}</div>
 			</div>
 		</div>
@@ -44,8 +43,7 @@
 						<button>${atchList.atchFileNm}</button>
 					</c:forEach>
 				</div>
-				<div>
-					<span>작성시간</span>
+				<div class="write-time">
 					<c:choose>
 						<c:when test="${boardDetail.boardDto.pstgMdfcnYmd == null}">
 							<span>작성일: ${boardDetail.boardDto.pstgWrtYmd}</span>
