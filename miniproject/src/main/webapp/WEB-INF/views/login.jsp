@@ -32,11 +32,5 @@
     </div>
 	<a href="member/join">회원가입 하기</a>
 </div>
-<script src="//code.jquery.com/jquery-3.6.1.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-	});
-</script>
 </body>
 </html>

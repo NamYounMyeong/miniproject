@@ -15,6 +15,5 @@
 		<a href="/logout">로그아웃</a>
  	</c:otherwise>
  </c:choose>
-<a href="board/list">디테일페이지</a>
 </body>
 </html>
