@@ -41,20 +41,18 @@ public class BoardController {
 		return "write";
 	}
 	
-	//게시글 상세페이지
-	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public String boardDetail(){
+	//임시 게시판 리스트 페이지
+	@RequestMapping(value="/list", method = RequestMethod.GET)
+	public String boardList(){
 		
-		return "board/detail";
+		return "board/list";
 	}
 	
-	//게시글 상세페이지2
-	@RequestMapping(value="detail2", method = RequestMethod.GET)
+	//게시글 상세페이지
+	@RequestMapping(value="detail", method = RequestMethod.GET)
 	public String boardDetail2(@RequestParam int pstgNo, Model model){
-		model.addAttribute("detail", boardDao.detailView(pstgNo));
-//		System.out.println("No: "+pstgNo);
-//		System.out.println("dao: "+boardDao.detailView(pstgNo));
-		return "board/detail2";
+		model.addAttribute("boardDetail", boardDao.boardDetail(pstgNo));
+		return "board/detail";
 	}
 	
 }

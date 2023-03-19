@@ -7,7 +7,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/spring/*-context.xml
+			/WEB-INF/spring/root-context.xml,
+			/WEB-INF/spring/security-context.xml
 		</param-value>
 	</context-param>
 	
@@ -54,7 +55,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- spring secutiry --><!-- 
+	<!-- spring secutiry -->
 	<filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -63,6 +64,6 @@
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping> -->
+    </filter-mapping>
 
 </web-app>

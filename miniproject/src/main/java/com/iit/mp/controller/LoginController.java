@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.iit.mp.dao.MemberDao;
 import com.iit.mp.dto.MemberDto;
+import com.iit.mp.security.CustomUserDetailService;
+import com.iit.mp.security.PrincipalDetails;
 
 @Controller
 public class LoginController {
@@ -19,6 +21,9 @@ public class LoginController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private CustomUserDetailService customUserDetailService;
 	
 	/* 로그인 */
 	@RequestMapping(value="login", method=RequestMethod.GET)
@@ -29,7 +34,10 @@ public class LoginController {
 	//로그인
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public String login(HttpSession session, @ModelAttribute MemberDto inputDto) {
+//		MemberDto findDto = memberDao.loginMember(inputDto.getMbrId());
 		MemberDto findDto = memberDao.loginMember(inputDto.getMbrId());
+		customUserDetailService.loadUserByUsername(findDto.getMbrId());
+		
 		if(findDto == null) {
 			return "redirect:login?error";
 		}
@@ -45,6 +53,7 @@ public class LoginController {
 		
 	} //로그인 end
 	
+	//로그아웃
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");

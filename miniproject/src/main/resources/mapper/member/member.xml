@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	<!-- <insert id="join" parameterType="MemberDto">
-		
-	</insert> -->
 	
 	<!-- 아이디 중복 검사 -->
 	<select id="checkId" parameterType="String" resultType="MemberDto">
@@ -51,7 +48,8 @@
 	<select id="login" parameterType="String" resultType="MemberDto">
 	  SELECT
 	          mbr_id,
-	          mbr_pw
+	          mbr_pw,
+	          mbr_grd
 	    FROM  mbr
 	   WHERE  mbr_id = #{mbrId}
 	</select>

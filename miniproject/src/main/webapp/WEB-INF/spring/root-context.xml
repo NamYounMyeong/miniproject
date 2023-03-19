@@ -9,7 +9,8 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+<!-- 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"></property> -->
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 		<property name="username" value="nemp"></property>
 		<property name="password" value="3274"></property>
 		
@@ -31,5 +32,9 @@
 	 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	    <constructor-arg index="0" ref="sqlSession"></constructor-arg>
 	 </bean>
+	 
+	 <bean id="CustomUserDetailService"
+         class="com.iit.mp.security.CustomUserDetailService">
+   	 </bean>
 		
 </beans>

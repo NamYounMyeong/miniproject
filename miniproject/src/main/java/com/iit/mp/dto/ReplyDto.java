@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class ReplyDto {
 	private int cmntNo, cmntPstgNo;
-	private String cmntWrtNm, cmntWrtcn;
+	private String cmntWrtNm, cmntWrtCn;
 	private Date cmntWrtYmd, cmntMdfcnYmd;
 }
