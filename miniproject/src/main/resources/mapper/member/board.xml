@@ -24,7 +24,7 @@
 	</select>
 	
 	<!-- 첨부파일 목록 조회 -->
-	<select id="selectAtchList" resultType="AtchDto" parameterType="int">
+	<select id="selectAtchList" resultType="AttachmentDto" parameterType="int">
 	   SELECT 
 	           A.atch_no, 
 	           A.atch_extn_nm, 
@@ -60,7 +60,7 @@
 			<result column="cmnt_pstg_no" property="cmntPstgNo"/>
 		</collection>
 		
-		<collection property="atchList" javaType="java.util.List" ofType="AtchDto" select="selectAtchList" column="pstg_no">
+		<collection property="atchList" javaType="java.util.List" ofType="AttachmentDto" select="selectAtchList" column="pstg_no">
 			<result column="atch_no" property="atchNo"/>
 			<result column="atch_extn_nm" property="atchExtnNm"/>
 			<result column="atch_file_nm" property="atchFileNm"/>

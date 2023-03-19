@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.iit.mp.dto.MemberDto;
+import com.iit.mp.security.SecurityUserVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -38,7 +39,8 @@ public class MemberDaoImpl implements MemberDao {
 	
 	/* 로그인 */
 	@Override
-	public MemberDto loginMember(String mbrId) {
+//	public MemberDto loginMember(String mbrId) {
+	public SecurityUserVO loginMember(String mbrId) {
 		return sqlSession.selectOne("member.login", mbrId);
 	}
 	

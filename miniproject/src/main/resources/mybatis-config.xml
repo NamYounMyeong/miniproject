@@ -12,5 +12,6 @@
 	    <typeAlias type="com.iit.mp.dto.ReplyDto" alias="ReplyDto"/>
 	    <typeAlias type="com.iit.mp.dto.AttachmentDto" alias="AttachmentDto"/>
 	    <typeAlias type="com.iit.mp.vo.BoardDetailVO" alias="BoardDetailVO"/>
+	    <typeAlias type="com.iit.mp.security.SecurityUserVO" alias="SecurityUserVO"/>
 	</typeAliases>
 </configuration>

@@ -2,22 +2,44 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
     https://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/security 
-    http://www.springframework.org/schema/security/spring-security.xsd">
+    http://www.springframework.org/schema/security/spring-security.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
     
-    <http auto-config="true" use-expressions="false">
-        <intercept-url pattern="/board/**" access="ROLE_USER"/>
-        <intercept-url pattern="/test/**" access="ROLE_USER"/>
+    
+    <beans:import resource="classpath*:servlet-context.xml"/> 
+    
+    <!--  secured method  -->
+	<global-method-security secured-annotations="enabled" />
+    
+    <http auto-config="true" use-expressions="true">
+        <csrf disabled="true"/>
+		<form-login login-page="/login" login-processing-url="login" username-parameter="mbrId" password-parameter="mbrPw"/>
+		<logout logout-url="/logout" logout-success-url="/"/>
+        <intercept-url pattern="/board/**" access="isRememberMe() "/>
+<!--         <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" /> -->
+		<intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" />
     </http>
 
+<!--     <authentication-manager> -->
+<!--         <authentication-provider> -->
+<!--             <user-service> -->
+<!--                 <user name="test" password="asd123123!" authorities="ROLE_USER" /> -->
+<!--             </user-service> -->
+<!--         </authentication-provider> -->
+<!--     </authentication-manager> -->
+    
+     <!-- loginService bean객체는 데이터 베이스에 있는 id,pw,auth 데이터를 전달 
+    	 authentication-provider의 user-service-ref속성으로 지정한 객체는 
+    	 UserDetailService 인터페이스를 선언하여 loadUserByUsername 메소드를 override 해야함.
+    	 이 메소드에서 완전한 UserDetails 객체를 리턴하면 Spring Security와 데이터베이스와의 연동이 정상적으로 이루어짐-->
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="mbrId" password="mbrPw" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
-    </authentication-manager>
+		<authentication-provider user-service-ref="CustomUserDetailService"/>
+	</authentication-manager>
+        
+	<context:component-scan base-package="com.iit.mp"/> 
 
 </beans:beans>

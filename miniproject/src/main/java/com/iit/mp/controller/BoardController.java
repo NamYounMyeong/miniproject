@@ -42,7 +42,7 @@ public class BoardController {
 	}
 	
 	//임시 게시판 리스트 페이지
-	@RequestMapping(value="list", method = RequestMethod.GET)
+	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String boardList(){
 		
 		return "board/list";

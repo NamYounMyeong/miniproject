@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor @Builder
 public class MemberDto {
-	private String mbrId, mbrPw, mbrNm, mbrMblTelno, mbrHomeAddr, mbrHomeDaddr;
+	private String mbrId, mbrPw, mbrNm, mbrMblTelno, mbrHomeAddr, mbrHomeDaddr, mbrGrd;
 	private Date mbrBrdt, mbrRegYmd;
 }
