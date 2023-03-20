@@ -102,5 +102,92 @@
 	          cmnt_mdfcn_ymd = sysdate
 	   WHERE  cmnt_no = #{cmntNo}
 	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="addBoardCount" parameterType="int">
+	  UPDATE pstg 
+	     SET pstg_inq_cnt = pstg_inq_cnt+1 
+	   WHERE pstg_no = #{pstgNo}
+	</update>
 
+<!-- 게시글 리스트 조회 -->
+	<select id="selectAll" resultType="BoardDto">
+        SELECT *
+        FROM pstg
+        ORDER BY pstg_group DESC, pstg_no ASC
+    </select>
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="viewCount" parameterType="int">
+    UPDATE pstg SET pstg_inq_cnt = pstg_inq_cnt + 1 WHERE pstg_no = #{pstgNo}
+	</update>
+	
+	
+	<!-- 수정 -->
+	<update id="updateToBoard" parameterType="BoardDto">
+	  UPDATE pstg
+	  SET pstg_wrt_title = #{pstgWrtTitle}, pstg_wrt_cn = #{pstgWrtCn}
+	  WHERE pstg_no = #{pstgNo} 
+	</update>
+
+	<!-- 삭제  -->
+	<delete id="boardToDelete">
+	  DELETE FROM pstg WHERE pstg_no = #{pstgNo}
+	</delete>
+	
+	<!-- 답글 달기 -->
+	<insert id="insertReplyWrite" parameterType="BoardDto">
+    INSERT INTO pstg (
+        pstg_no,
+        pstg_wrt_id,
+        pstg_wrt_title,
+        pstg_wrt_cn,
+        pstg_wrt_ymd,
+        pstg_group,
+        pstg_depth,
+        pstg_parent
+    )
+    SELECT
+        pstg_seq.nextval,
+        #{pstgWrtId},
+        #{pstgWrtTitle},
+        #{pstgWrtCn},
+        sysdate,
+        pstg_group + 1,
+        pstg_depth + 1,
+        #{pstgNo}
+    FROM pstg
+    WHERE pstg_no = #{pstgNo}
+	</insert>
+	<!-- 답변등록 조회 -->
+       <select id="selectReplyListToBoard" parameterType="int" resultType="BoardDto">
+    SELECT *
+    FROM pstg
+    WHERE pstg_group = #{pstgGroup} AND pstg_parent = #{pstgParent}
+    ORDER BY pstg_parent DESC
+	</select>
+	
+	<!-- 게시글 등록 -->
+	 <insert id="writeBoard" parameterType="BoardDto">
+    <selectKey keyProperty="pstgNo" resultType="int" order="BEFORE">
+        SELECT pstg_seq.nextval FROM dual
+    </selectKey>
+    INSERT into pstg (
+        pstg_no,
+        pstg_wrt_id,
+        pstg_wrt_title,
+        pstg_wrt_cn,
+        pstg_group,
+        pstg_depth,
+        pstg_wrt_ymd
+    ) VALUES (
+        #{pstgNo},
+        #{pstgWrtId},
+        #{pstgWrtTitle},
+        #{pstgWrtCn},
+        #{pstgGroup},
+        #{pstgDepth},
+        sysdate
+    )
+	</insert>
 </mapper>

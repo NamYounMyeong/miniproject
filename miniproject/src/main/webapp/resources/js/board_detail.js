@@ -27,25 +27,29 @@ $(function(){
 							var replyBox = $('<div>').addClass("reply-box");
 							
 							/* 댓글 내용 */
-							var replyContent = $("<span>").text(resp[resp.length-1].cmntWrtCn);
+							var replyContent = $("<span>").text(resp[resp.length-1].cmntWrtCn).addClass("reply-content");
 							/* 작성한 사람 */
-							var replyId = $("<span>").text(resp[resp.length-1].cmntWrtNm);
+							var replyId = $("<span>").text(resp[resp.length-1].cmntWrtNm).addClass("reply-id");
 							/* 작성일 */
 							var date = moment(resp[resp.length-1].cmntWrtYmd).format("YYYY-MM-DD HH:mm");
 							/* 댓글 번호 */
 							var cmntNo = resp[resp.length-1].cmntNo;
 							
-							var replyDate = $("<span>").text(date);
+							var replyDate = $("<span>").text(date).addClass("reply-date");
 							var replyUpdateBtn = $("<button>").text("수정").addClass("reply-update-btn");
 							var replyDeleteBtn = $("<button>").text("삭제").addClass("reply-delete-btn");
 							
 							/* 비동기 댓글 작성시 태그 추가 */
+							/* 작성자 추가 */
 							var div = $('<div>').append(replyId);
 							replyBox.append(div);
+							/* 댓글 내용 추가 */
 							var div2 = $('<div>').append(replyContent);
 							replyBox.children("div").last().append(div2);
+							/* 작성일 추가 */
 							var div3 = $('<div>').append(replyDate).append($("<input>").val(cmntNo).attr("type","hidden"));
 							replyBox.children("div").last().append(div3);
+							/* 버튼 추가 */
 							var div4 = $('<div>').append(replyUpdateBtn).append(replyDeleteBtn);
 							replyBox.children("div").last().append(div4);
 							console.log(resp.length);
