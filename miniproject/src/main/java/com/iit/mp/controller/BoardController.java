@@ -49,9 +49,9 @@ public class BoardController {
 	
 	//게시글 상세페이지
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public String boardDetail2(@RequestParam(required = false) Integer pstgNo, Model model){
+	public String detail(@RequestParam int pstgNo, Model model){
 		//조회수 증가
-	    if (pstgNo != null) {
+	    if (pstgNo != 0) {
 	        boardDao.increaseViewCount(pstgNo);
 	    }
 		model.addAttribute("boardDetail", boardDao.boardDetail(pstgNo));

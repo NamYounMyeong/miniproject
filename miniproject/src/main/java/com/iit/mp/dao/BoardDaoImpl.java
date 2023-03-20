@@ -22,8 +22,7 @@ public class BoardDaoImpl implements BoardDao {
 	//게시글 상세페이지
 	@Override
 	public BoardDetailVO boardDetail(int pstgNo) {
-		BoardDetailVO board = sqlSession.selectOne("board.detail", pstgNo); 
-		return board;
+		return sqlSession.selectOne("board.detail", pstgNo); 
 	}
 	
 	//댓글 등록
