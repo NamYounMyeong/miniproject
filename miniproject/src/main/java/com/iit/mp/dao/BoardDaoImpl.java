@@ -19,6 +19,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
 	//게시글 상세페이지
 	@Override
 	public BoardDetailVO boardDetail(int pstgNo) {
