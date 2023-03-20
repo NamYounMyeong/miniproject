@@ -1,5 +1,8 @@
 package com.iit.mp.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -19,7 +22,8 @@ public class BoardDaoImpl implements BoardDao {
 	//게시글 상세페이지
 	@Override
 	public BoardDetailVO boardDetail(int pstgNo) {
-		return sqlSession.selectOne("board.detail", pstgNo);
+		BoardDetailVO board = sqlSession.selectOne("board.detail", pstgNo); 
+		return board;
 	}
 	
 	//댓글 등록
@@ -47,5 +51,65 @@ public class BoardDaoImpl implements BoardDao {
 		int result = sqlSession.update("board.updateReply", replyDto);
 		return result > 0;
 	}
+	
+	//게시판 글쓰기
+		@Override
+		public void writeBoard(BoardDto boardDto) {
+			sqlSession.insert("board.writeBoard", boardDto);
+			 if (boardDto.getAttachments() != null) {
+			        sqlSession.insert("insertAttachments", boardDto.getAttachments());
+			        sqlSession.insert("insertAttachmentMapping", boardDto.getAttachments());
+			 }
+		}
+
+	// 게시판 리스트 조회
+	@Override
+	public List<BoardDto> selectBoard() {
+		List<BoardDto> boards = sqlSession.selectList("board.selectAll");
+
+		// DB에서 조회한 날짜 데이터를 Date 타입으로 변환하여 BoardDto 객체에 설정
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		for (BoardDto board : boards) {
+			try { // 예외처리
+				Date pstgWrtYmd = dateFormat.parse(board.getPstgWrtYmd());
+				board.setPstgWrtYmd(pstgWrtYmd);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return boards;
+	}
+	
+	// 게시글 수정
+	@Override
+	public void boardUpdate(BoardDto boardDto) {
+		sqlSession.update("board.updateToBoard", boardDto);
+	}
+
+	// 게시글 삭제
+	@Override
+	public void deleteBoard(int pstgNo) {
+		sqlSession.delete("board.boardToDelete", pstgNo);
+
+	}
+
+	// 조회수 증가
+	public void increaseViewCount(int pstgNo) {
+		sqlSession.update("board.viewCount", pstgNo);
+	}
+
+	// 게시글 답변등록
+	@Override
+	public void insertReplyWrite(BoardDto boardDto) {
+		sqlSession.insert("board.insertReplyWrite", boardDto);
+	}
+
+	// 게시글 답변조회
+	@Override
+	public List<BoardDto> selectReplyList(int pstgParent) {
+		return sqlSession.selectList("board.selectReplyListToBoard", pstgParent);
+	}
+
 	
 }

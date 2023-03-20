@@ -17,4 +17,26 @@ public interface BoardDao {
 	boolean deleteReply(int cmntNo);
 	//댓글 수정
 	boolean updateReply(ReplyDto replyDto);
+	
+	// 게시글쓰기
+	void writeBoard(BoardDto boardDto);
+	
+	//게시글 수정
+	void boardUpdate(BoardDto boardDto);
+		
+	// 게시글 삭제
+	void deleteBoard(int pstgNo);
+
+	// 조회수 증가
+	void increaseViewCount(int pstgNo);
+	
+	//게시글 답변등록
+	void insertReplyWrite(BoardDto boardDto);
+	
+	//게시글 답변조회
+	List<BoardDto> selectReplyList(int pstgParent);
+	
+	//게시글 리스트 조회
+	List<BoardDto> selectBoard();
+	
 }

@@ -12,7 +12,11 @@
 <body>
 	<div class="detail-view container-1000">
 		<div class="detail-top-area">
-			<a href="list">목록으로</a>
+			<!-- <a href="list">목록으로</a> -->
+			<input type="button" id="boardList_button" value="목록보기" style="height:25px" />
+			<input type="button" id="update_button" value="편집" style="height:25px" />
+		    <input type="button" id="delete_button" value="삭제" style="height:25px" />
+		    <input type="button" id="reply_button" value="답글쓰기" style="height:25px" />
 		</div>
 		<div class="detail-middle-area">
 			<div class="title-box">
@@ -108,5 +112,31 @@
 	var root = "${pageContext.request.contextPath}";
 </script>
 <script src="${pageContext.request.contextPath}/resources/js/board_detail.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#boardList_button').on('click', function(event) {
+			location.href = 'board';
+		});
+		
+		$('#delete_button').on('click', function(event) {
+		    const ok = confirm("${boardDetail.boardDto.pstgNo}번 글을 삭제할까요?");
+		    if (!ok) return; 
+		    location.href = 'boardDelete?pstgNo=${boardDetail.boardDto.pstgNo}';
+		});
+		
+		$('#reply_button').on('click', function(event) {
+		    const ok = confirm("${boardDetail.boardDto.pstgNo}번 답글을 작성 하시겠습니까?");
+		    if (!ok) return; 
+		    location.href = 'replyWrite?pstgNo=${boardDetail.boardDto.pstgNo}';
+		});
+
+		
+		$('#update_button').on('click', function(event) {
+			const ok = confirm("수정 하시겠습니까?");
+			if (!ok) return; 
+			location.href = 'edit?pstgNo=${boardDetail.boardDto.pstgNo}';
+		});
+	});
+	</script>
 </body>
 </html>
