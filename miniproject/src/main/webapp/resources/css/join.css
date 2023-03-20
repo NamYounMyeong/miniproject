@@ -1,24 +1,62 @@
-body {
-      min-height: 100vh;
+@CHARSET "UTF-8";
 
-      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    }
+.confirm-text {
+	color: red;
+}
 
-    .input-form {
-      max-width: 680px;
+.join-form {
+	text-align: center;
+}
 
-      margin-top: 80px;
-      padding: 32px;
+.container-500 { width:500px; margin:0 auto; }
 
-      background: #fff;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-    }
+.row {
+    margin: 10px 0px;
+}
+
+.w-100 {
+    width:100%;
+}
+
+input::placeholder {
+	font-weight: 400;
+	font-size: 13px;
+}
+
+.join-form > div,
+.join-btn-box {
+	width: 100%;
+	margin: 40px auto;
+	background-color: white;
+}
+
+.join-input {
+    font-size: 15px;
+    padding: 0.75em;
+    outline: none;
+    border:1px solid #CBCACA;
+    border-radius:5px;
+}
+
+.join-input:focus {
+    border-color: #81D4FA;
+}
+
+.join-btn-box {
+	text-align: center;
+}
+
+.join-btn-box > button {
+	border: 1px solid #CBCACA;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0.75em;/*글자 크기의 0.75배*/
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #81D4FA;
+    color: white;
+}
+
+.join-btn-box > button:hover {
+	background-color: #4FC3F7;
+}

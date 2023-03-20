@@ -29,7 +29,7 @@
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                           <li><a href="member/login">로그인</a></li>
+                           <li><a href="login">로그인</a></li>
                            <li><a href="member/join">회원가입</a></li>
 
                             <!--     Dropdown level 2 -->
@@ -40,7 +40,7 @@
                                 <div id="dropdown-lvl2" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="board">게시판</a></li>
+                                            <li><a href="board/board">게시판</a></li>
                                         </ul>
                                     </div>
                                 </div>

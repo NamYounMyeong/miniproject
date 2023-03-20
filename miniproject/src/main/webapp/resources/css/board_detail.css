@@ -1,0 +1,118 @@
+@CHARSET "UTF-8";
+
+.container-1000 { width:1000px; margin:0 auto; }
+
+.row {
+    margin: 10px 0px;
+}
+
+.w-100 {
+    width:100%;
+}
+
+.detail-view {
+	border: 1px solid #e6e6e6;
+	margin-top: 100px;
+	padding: 20px;
+}
+
+.detail-view > div {
+	margin: 10px 0 ;
+	border-bottom: 1px solid #e6e6e6;
+	padding: 10px;
+}
+
+.on {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e6e6e6;
+	width: 98%;
+	background-color: white;
+	position: fixed;
+	top: 10px;
+	bottom: 0;
+}
+
+.detail-top-area {
+	top: 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.detail-middle-area {
+}
+
+.detail-bottom-area {
+	bottom: 0;
+}
+
+.context-box {
+	min-height: 600px;
+}
+.title-box {
+	display: flex;
+	justify-content: space-between;
+}
+.title-box>div:nth-child(2) {
+	display: flex;
+}
+
+.title-box > div:nth-child(2) > div {
+	margin-right: 10px;
+}
+
+/* 댓글 CSS */
+.reply-area {
+	width: 1000px;
+	border: 1px solid #e6e6e6;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+.reply-box {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #e6e6e6;
+	margin-top: 5px;
+}
+
+textarea {
+	resize: none;
+	width: 100%;
+}
+
+.reply-write {
+	display: flex;
+}
+
+.reply-box > div {
+	display: flex;
+}
+
+.write-time {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.detail-middle-area > div {
+	margin: 10px 0;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.detail-middle-area > div:NTH-CHILD(2) {
+	border: none;
+}
+
+.board-title {
+	margin-bottom: 5px;
+}
+
+.board-title > span {
+	font-weight: bold;
+	padding-right: 10px;
+}
+
+.board-title > span:NTH-CHILD(1) {
+	border-right: 1px solid #000000;
+}
+

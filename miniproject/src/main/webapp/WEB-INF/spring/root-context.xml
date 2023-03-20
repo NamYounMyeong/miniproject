@@ -31,5 +31,9 @@
 	 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	    <constructor-arg index="0" ref="sqlSession"></constructor-arg>
 	 </bean>
+	 
+	 <bean id="CustomUserDetailService"
+         class="com.iit.mp.security.CustomUserDetailService">
+   	 </bean>
 		
 </beans>

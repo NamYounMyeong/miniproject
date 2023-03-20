@@ -20,10 +20,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
 	</definition>
 	
-	<definition name="./*/*" extends="template">
-		<put-attribute name="body" value="/webapp/WEB-INF/views/{1}/{2}.jsp" />
+	<definition name="*/*" extends="template">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 	</definition>
-	<definition name="*/*/*" extends="template">
-		<put-attribute name="body" value="/webapp/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	
+	<definition name="*/member/*" extends="template">
+		<put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}.jsp" />
 	</definition>
 </tiles-definitions>
