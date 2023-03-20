@@ -22,7 +22,7 @@
 <!--         <intercept-url pattern="/board/**" access="isRememberMe()"/> -->
         <intercept-url pattern="/board/**" access="permitAll()"/>
 <!--         <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" /> -->
-<!-- 		<intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" /> -->
+		<intercept-url pattern="/favicon.ico" access="permitAll()" />
     </http>
     
     <authentication-manager>
