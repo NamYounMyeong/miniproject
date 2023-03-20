@@ -17,4 +17,6 @@ public interface BoardDao {
 	boolean deleteReply(int cmntNo);
 	//댓글 수정
 	boolean updateReply(ReplyDto replyDto);
+	//조회수 증가
+	
 }
