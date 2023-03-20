@@ -50,7 +50,7 @@
 	  SELECT
 	          mbr_id,
 	          mbr_pw,
-	          mbr_nmm
+	          mbr_nm,
 	          mbr_authority,
 	          mbr_enabled
 	    FROM  mbr

@@ -35,5 +35,12 @@
 	 <bean id="CustomUserDetailsService"
          class="com.iit.mp.security.CustomUserDetailsService">
    	 </bean>
+   	 
+   	 <context:component-scan base-package="com.iit.mp.**.**" use-default-filters="false">
+   	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
+   	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+   	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+   	 </context:component-scan>
 		
 </beans>

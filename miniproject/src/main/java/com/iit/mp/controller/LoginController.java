@@ -5,12 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.iit.mp.dao.MemberDao;
-import com.iit.mp.dto.MemberDto;
 import com.iit.mp.security.CustomUserDetailsService;
 
 @Controller
@@ -22,7 +20,7 @@ public class LoginController {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private CustomUserDetailsService customUserDetailService;
+	private CustomUserDetailsService customUserDetailsService;
 	
 	/* 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
