@@ -16,19 +16,30 @@
 	<global-method-security secured-annotations="enabled" />
     
     <http auto-config="true" use-expressions="true">
-        <csrf disabled="true"/>
-		<form-login login-page="/login" login-processing-url="login" username-parameter="mbrId" password-parameter="mbrPw"/>
-		<logout logout-url="/logout" logout-success-url="/"/>
-<!--         <intercept-url pattern="/board/**" access="isRememberMe()"/> -->
-        <intercept-url pattern="/board/**" access="permitAll()"/>
-<!--         <intercept-url pattern="/**" access="hasAnyRole('USER, ADMIN')" /> -->
-<!-- 		<intercept-url pattern="/favicon.ico" access="ROLE_ANONYMOUS" /> -->
+<!--         <csrf disabled="true"/> -->
+        <!-- 로그인 -->
+		<form-login login-page="/login" login-processing-url="login" username-parameter="mbrId" password-parameter="mbrPw" default-target-url="/"/>
+		<!-- 로그아웃 (세션 초기화, 쿠키 삭제)-->
+		<logout logout-url="/logout" logout-success-url="/" invalidate-session="true" delete-cookies="true"/>
+		<!-- 자동 로그인 설정 (7일 = 604800초)-->
+<!-- 		<remember-me data-source-ref="dataSource" remember-me-parameter="remember-me" token-validity-seconds="604800"/> -->
+		
+		<!-- 게시판 관련 url은 ROLE_USER 권한을 가지고 있어야 접근 가능 -->
+        <intercept-url pattern="/board/**" access="hasRole('ROLE_USER')"/>
+        <!-- 그 외에 모든 url은 아무나 접근 가능 -->
+        <intercept-url pattern="/**" access="permitAll()" />
+<!-- 		<intercept-url pattern="/favicon.ico" access="permitAll()" /> -->
     </http>
     
+    <beans:bean id="userDeniedHandler" class="com.iit.mp.security.UserDeniedHandler"></beans:bean>
+    
     <authentication-manager>
-		<authentication-provider user-service-ref="CustomUserDetailService"/>
+		<authentication-provider ref="userAuthProvider"></authentication-provider>
+		<authentication-provider user-service-ref="userService"></authentication-provider>
 	</authentication-manager>
+	
+	<beans:bean id="userService" class="com.iit.mp.security.CustomUserDetailsService"/>
+	<beans:bean id="userAuthProvider" class="com.iit.mp.security.CustomAuthenticationProvider"/>
         
-	<context:component-scan base-package="com.iit.mp"/> 
-
+	<context:component-scan base-package="com.iit.mp.security"/>
 </beans:beans>

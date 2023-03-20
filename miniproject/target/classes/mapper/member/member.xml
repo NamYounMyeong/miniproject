@@ -45,11 +45,14 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="String" resultType="MemberDto">
+<!-- 	<select id="login" parameterType="String" resultType="MemberDto"> -->
+	<select id="login" parameterType="String" resultType="UserVO">
 	  SELECT
 	          mbr_id,
 	          mbr_pw,
-	          mbr_grd
+	          mbr_nmm
+	          mbr_authority,
+	          mbr_enabled
 	    FROM  mbr
 	   WHERE  mbr_id = #{mbrId}
 	</select>

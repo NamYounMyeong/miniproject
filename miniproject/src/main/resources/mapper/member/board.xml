@@ -102,6 +102,13 @@
 	          cmnt_mdfcn_ymd = sysdate
 	   WHERE  cmnt_no = #{cmntNo}
 	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="addBoardCount" parameterType="int">
+	  UPDATE pstg 
+	     SET pstg_inq_cnt = pstg_inq_cnt+1 
+	   WHERE pstg_no = #{pstgNo}
+	</update>
 
 <!-- 게시글 리스트 조회 -->
 	<select id="selectAll" resultType="BoardDto">
