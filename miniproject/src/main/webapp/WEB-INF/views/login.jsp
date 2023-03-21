@@ -12,7 +12,7 @@
 <body>
 <div class="container-300 screen-center">
 	<div>
-	<form action="login" method="post">
+	<form action="#" method="post">
 		<div class="row">
 			<input class="w-100 login-input" name="mbrId" type="text" placeholder="아이디 입력">
 		</div>

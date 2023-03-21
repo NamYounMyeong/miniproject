@@ -50,19 +50,19 @@ public class LoginController {
 //		
 //	} //로그인 end
 	
-	//로그인
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(){
-		return "redirect:/";
-	}//로그인 end
-	
-	
-	//로그아웃
-	@RequestMapping(value="logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.removeAttribute("loginId");
-		return "redirect:/";
-	}
+//	//로그인
+//	@RequestMapping(value="/login", method=RequestMethod.POST)
+//	public String login(){
+//		return "redirect:/";
+//	}//로그인 end
+//	
+//	
+//	//로그아웃
+//	@RequestMapping(value="logout", method=RequestMethod.GET)
+//	public String logout(HttpSession session) {
+//		session.removeAttribute("loginId");
+//		return "redirect:/";
+//	}
 	
 	
 }
