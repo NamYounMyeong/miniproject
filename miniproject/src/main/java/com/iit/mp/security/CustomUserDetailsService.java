@@ -21,9 +21,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String mbrId) throws UsernameNotFoundException {
 //		MemberDto user = memberDao.loginMember(mbrId);
-		System.out.println("로드유저: "+memberDao.loginMember(mbrId));
+		System.out.println("로드유저: "+ mbrId);
+		System.out.println("로드유저2: "+memberDao.loginMember(mbrId));
 		UserVO user = memberDao.loginMember(mbrId);
 		if(user == null) {
+			System.out.println(user);
 			throw new UsernameNotFoundException(mbrId);
 		}
 		System.err.println(user);
