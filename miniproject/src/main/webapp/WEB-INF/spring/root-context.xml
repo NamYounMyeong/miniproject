@@ -31,14 +31,14 @@
 	 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	    <constructor-arg index="0" ref="sqlSession"></constructor-arg>
 	 </bean>
-	 
-	 <bean id="CustomUserDetailsService"
-         class="com.iit.mp.security.CustomUserDetailsService">
-   	 </bean>
+	 <!-- 시큐리티 설정중 우선 제외 -->
+<!-- 	 <bean id="CustomUserDetailsService" -->
+<!--          class="com.iit.mp.security.CustomUserDetailsService"> -->
+<!--    	 </bean> -->
    	 
-   	 <bean id="CustomAuthenticationSuccessHandler"
-         class="com.iit.mp.security.CustomAuthenticationSuccessHandler">
-   	 </bean>
+<!--    	 <bean id="CustomAuthenticationSuccessHandler" -->
+<!--          class="com.iit.mp.security.CustomAuthenticationSuccessHandler"> -->
+<!--    	 </bean> -->
 	 
 	 <context:component-scan base-package="com.iit.mp.**" use-default-filters="false">
    	 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>

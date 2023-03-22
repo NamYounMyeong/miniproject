@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.iit.mp.dao.MemberDao;
-import com.iit.mp.security.CustomUserDetailsService;
+//import com.iit.mp.security.CustomUserDetailsService;/*시큐리티 설정중 우선 제외*/
 
 @Controller
 public class LoginController {
@@ -18,9 +18,9 @@ public class LoginController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
+	/*시큐리티 설정중 우선 제외*/
+//	@Autowired
+//	private CustomUserDetailsService customUserDetailsService;
 	
 	/* 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
