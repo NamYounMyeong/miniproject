@@ -3,28 +3,35 @@
   "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
   "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
-<tiles-definitions>
 
-	<!-- tiles 적용 -->
-	<definition name="template" template="/WEB-INF/tiles/template.jsp">
-		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="left" value="/WEB-INF/tiles/side.jsp" />
-		<!-- <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" /> -->
-	</definition>
  
  
  
- <!-- tiles 미적용 -->
-	<definition name="*" extends="template">
-		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
-	</definition>
+
 	
-	<definition name="*/*" extends="template">
-		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-	</definition>
-	
-	<definition name="*/member/*" extends="template">
-		<put-attribute name="body" value="/WEB-INF/{1}/{2}/{3}.jsp" />
-	</definition>
+<tiles-definitions>
+<!-- tiles 적용 -->
+  <definition name="template" template="/WEB-INF/tiles/template.jsp">
+    <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+    <put-attribute name="body" value="" />
+    <put-attribute name="left" value="/WEB-INF/tiles/side.jsp" />
+  </definition>
+  
+<!--  tiles 미적용 -->
+  <definition name="*/*" extends="template">
+    <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+  </definition>
+<!-- 
+  <definition name="member/*" extends="template">
+    <put-attribute name="body" value="/WEB-INF/views/member/join.jsp" />
+    <put-attribute name="left" value="/WEB-INF/tiles/side.jsp" />
+    <put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
+  </definition>
+ -->  
+
+  <definition name="*" extends="template">
+    <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+  </definition>
 </tiles-definitions>
+
+
