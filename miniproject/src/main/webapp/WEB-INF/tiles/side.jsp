@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="${path}/resources/css/left-sidebar.css" rel="stylesheet" type="text/css">
+<link rel="canonical" href="http://example.com/original-page" />
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -29,8 +30,8 @@
                 <div id="dropdown-lvl1" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul class="nav navbar-nav">
-                           <li><a href="login">로그인</a></li>
-                           <li><a href="member/join">회원가입</a></li>
+                           <li><a href="${path}/login">로그인</a></li>
+                           <li><a href="${path}/member/join">회원가입</a></li>
 
                             <!--     Dropdown level 2 -->
                             <li class="panel panel-default" id="dropdown">
@@ -40,7 +41,7 @@
                                 <div id="dropdown-lvl2" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="board/board">게시판</a></li>
+                                            <li><a href="${path}/board/board">게시판</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -71,7 +72,8 @@
             $('.side-body').removeClass('body-slide-in');
 
         });
-    });
+
+    }); 
     </script>
 </body>
 </html>
