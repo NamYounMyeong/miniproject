@@ -38,5 +38,5 @@ public interface BoardDao {
 	
 	//게시글 리스트 조회
 	List<BoardDto> selectBoard();
-	
+
 }

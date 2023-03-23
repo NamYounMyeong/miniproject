@@ -35,5 +35,6 @@
 	 <bean id="CustomUserDetailService"
          class="com.iit.mp.security.CustomUserDetailService">
    	 </bean>
+   	 
 		
 </beans>

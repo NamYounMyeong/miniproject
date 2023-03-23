@@ -45,6 +45,12 @@ public class BoardDto {
     public void setPstgWrtTitle(String pstgWrtTitle) {
         this.pstgWrtTitle = pstgWrtTitle;
     }
+    
+    // MyBatis가 'pstg_parent' 프로퍼티에 대한 getter 메소드를 찾을 수 있음
+    /*public int getPstg_parent() {
+        return pstgParent;
+    }*/
+
 
 
 }
