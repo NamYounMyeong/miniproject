@@ -83,7 +83,7 @@
 		<c:forEach var="replyList" items="${boardDetail.replyList}">
 			<div class="reply-box">
 				<div>
-					<span class="reply-id">${replyList.cmntWrtNm}</span>
+					<span class="reply-id">작성자 ${replyList.cmntWrtNm}</span>
 				</div>
 				<div>
 					<span class="reply-content">
@@ -99,20 +99,16 @@
 				<div>
 					<c:choose>
 						<c:when test="${replyList.cmntMdfcnYmd == null}">
-							<span class="reply-date">${replyList.cmntWrtYmd}</span>
+							<span class="reply-date">작성일: ${replyList.cmntWrtYmd}</span>
 						</c:when>
 						<c:otherwise>
-							<span class="reply-date">${replyList.cmntMdfcnYmd} (수정됨)</span>
+							<span class="reply-date">작성일: ${replyList.cmntMdfcnYmd} (수정됨)</span>
 						</c:otherwise>
 					</c:choose>
 					<input name="replyCmntNo" value="${replyList.cmntNo}" type="hidden"/>
 					<input name="replyCmntParent" value="${replyList.cmntParent}" type="hidden"/>
 					<input name="replyCmntGroup" value="${replyList.cmntGroup}" type="hidden"/>
 					<input name="replyCmntDepth" value="${replyList.cmntDepth}" type="hidden"/>
-					<span>댓글 번호: ${replyList.cmntNo}</span>
-					<span>부모: ${replyList.cmntParent}</span>
-					<span>그룹: ${replyList.cmntGroup}</span>
-					<span>차수: ${replyList.cmntDepth}</span>
 				</div>
 				<div>
 					<div class="reply-btn-container">

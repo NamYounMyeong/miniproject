@@ -27,7 +27,6 @@ public class LoginController {
 	/* 로그인 */
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginPage(){
-		System.err.println("컨트롤러");
 		return "login";
 	}
 	
