@@ -12,7 +12,7 @@ public interface MemberDao {
 	/* 회원가입 */
 	void memberJoin(MemberDto memberDto);
 	/* 로그인 */
-//	MemberDto loginMember(String mbrId);
-	UserVO loginMember(String mbrId);
+	MemberDto loginMember(String mbrId);
+//	UserVO loginMember(String mbrId);
 	
 }

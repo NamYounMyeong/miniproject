@@ -7,13 +7,20 @@
 </head>
 <body>
 	<h1>로그인 ID: ${sessionScope.loginId}</h1>
-	<a href="member/join">회원가입</a>
-	<a href="/login">로그인</a>
-	<sec:authorize access="isAuthenticated()">
-	<form action="<c:url value='/logout'/>" method="post">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="submit" value="로그아웃"/>
-	</form>
-	</sec:authorize>
+	<c:choose>
+		<c:when test="${sessionScope.loginId == null}">
+			<a href="member/join">회원가입</a>
+			<a href="/login">로그인</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/logout">로그아웃</a>
+		</c:otherwise>
+	</c:choose>
+<%-- 	<sec:authorize access="isAuthenticated()"> --%>
+<%-- 	<form action="<c:url value='/logout'/>" method="post"> --%>
+<%-- 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+<!-- 		<input type="submit" value="로그아웃"/> -->
+<!-- 	</form> -->
+<%-- 	</sec:authorize> --%>
 </body>
 </html>

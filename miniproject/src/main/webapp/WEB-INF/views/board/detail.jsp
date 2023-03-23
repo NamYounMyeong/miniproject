@@ -71,6 +71,9 @@
 				<textarea name="cmntWrtCn" rows="5" cols="100"></textarea>
 				<input name="cmntWrtNm" value="${sessionScope.loginId}" type="hidden"/>
 				<input name="cmntPstgNo" value="${boardDetail.boardDto.pstgNo}" type="hidden"/>
+				<input name="cmntParent" value="null" type="hidden"/>
+				<input name="cmntNo" value="${replyNo}" type="hidden"/>
+<!-- 				<input name="cmntGroup" value="" type="hidden"/> -->
 				<button type="button" class="reply-write-btn">작성</button>
 			</c:otherwise>
 			</c:choose>
@@ -83,7 +86,15 @@
 					<span class="reply-id">${replyList.cmntWrtNm}</span>
 				</div>
 				<div>
-					<span class="reply-content">${replyList.cmntWrtCn}</span>
+					<span class="reply-content">
+						<c:if test="${replyList.cmntDepth > 0}">
+							<c:forEach var="depth" begin="1" end="${replyList.cmntDepth}" step="1">
+								<span>&nbsp</span>
+							</c:forEach>
+							<span>RE:</span>
+						</c:if>
+						${replyList.cmntWrtCn}
+					</span>
 				</div>
 				<div>
 					<c:choose>
@@ -94,14 +105,26 @@
 							<span class="reply-date">${replyList.cmntMdfcnYmd} (수정됨)</span>
 						</c:otherwise>
 					</c:choose>
-					<input value="${replyList.cmntNo}" type="hidden"/>
+					<input name="replyCmntNo" value="${replyList.cmntNo}" type="hidden"/>
+					<input name="replyCmntParent" value="${replyList.cmntParent}" type="hidden"/>
+					<input name="replyCmntGroup" value="${replyList.cmntGroup}" type="hidden"/>
+					<input name="replyCmntDepth" value="${replyList.cmntDepth}" type="hidden"/>
+					<span>댓글 번호: ${replyList.cmntNo}</span>
+					<span>부모: ${replyList.cmntParent}</span>
+					<span>그룹: ${replyList.cmntGroup}</span>
+					<span>차수: ${replyList.cmntDepth}</span>
 				</div>
-				<c:if test="${sessionScope.loginId == replyList.cmntWrtNm}">
-				<div class="reply-btn-container">
-					<button class="reply-update-btn">수정</button>
-					<button class="reply-delete-btn">삭제</button>
+				<div>
+					<div class="reply-btn-container">
+						<c:if test="${sessionScope.loginId != null}">
+							<button class="re-reply-btn">댓글 쓰기</button>
+						</c:if>
+						<c:if test="${sessionScope.loginId == replyList.cmntWrtNm}">
+							<button class="reply-update-btn">수정</button>
+							<button class="reply-delete-btn">삭제</button>
+						</c:if>
+					</div>
 				</div>
-				</c:if>
 			</div>
 		</c:forEach>
 		</div>

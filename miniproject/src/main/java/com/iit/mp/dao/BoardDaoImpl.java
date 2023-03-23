@@ -28,6 +28,12 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne("board.detail", pstgNo); 
 	}
 	
+	//댓글 번호 생성
+	@Override
+	public int replyNo() {
+		return sqlSession.selectOne("board.replyNo");
+	}
+	
 	//댓글 등록
 	@Override
 	public void replyWrite(ReplyDto replyDto) {

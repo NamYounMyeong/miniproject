@@ -39,9 +39,8 @@ public class MemberDaoImpl implements MemberDao {
 	
 	/* 로그인 */
 	@Override
-//	public MemberDto loginMember(String mbrId) {
-	public UserVO loginMember(String mbrId) {
-		System.out.println("DAO: "+mbrId);
+	public MemberDto loginMember(String mbrId) {
+//	public UserVO loginMember(String mbrId) {
 		return sqlSession.selectOne("member.login", mbrId);
 	}
 	
