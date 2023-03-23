@@ -1,7 +1,6 @@
 package com.iit.mp.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,18 +21,6 @@ public class BoardController {
 	@Autowired
 	private BoardDao boardDao;
 	
-	//AUIGRID
-	@RequestMapping(value = "/auiPDF", method = RequestMethod.POST)
-	public String PDF(Locale locale, Model model) {
-		
-		return "export/export"; //export.jsp의 위치
-	}
-	
-	@RequestMapping(value = "/auiEXCEL", method = RequestMethod.POST)
-	public String EXCEL(Locale locale, Model model) {
-		
-		return "export/export"; //export.jsp의 위치
-	}
 	//게시판 글쓰기 페이지
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write(){
@@ -58,38 +45,11 @@ public class BoardController {
 		return "board/detail";
 	}
 	
+	
 	//게시판 글쓰기(첨부파일 수정중)
 		@RequestMapping(value = "insert", method = RequestMethod.POST)
-	/*	public String writeBoard(BoardDto boardDto, MultipartHttpServletRequest req){*/
 			public String writeBoard(BoardDto boardDto){
-			// 1. 요청 데이터 읽기 (전달인자로 대체)
-			
-	/*		MultipartFile attach = req.getFile("attach");*/
-
-					/*if (attach != null) { //내용이 있는 경우
-						// 2. 데이터 처리
-						String path = context.getRealPath("/board-attachments");
-						String fileName = attach.getOriginalFilename(); //파일 이름 가져오기
-						if (fileName != null && fileName.length() > 0) {
-							String uniqueFileName = Util.makeUniqueFileName(fileName);
-							
-							try {				
-								attach.transferTo(new File(path, uniqueFileName));//파일 저장
-								
-								// 첨부파일 정보를 객체에 저장
-								ArrayList<BoardAttachDto> attachments = new ArrayList<>(); // 첨부파일 정보를 저장하는 DTO 객체
-								BoardAttachDto attachment = new BoardAttachDto();
-								attachment.setAtchFileNm(fileName);
-								attachment.setAtchExtnNm(uniqueFileName);
-								attachments.add(attachment);
-								boardDto.setAttachments(attachments);
-								
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-					}		
-			*/
+	
 			System.out.println(boardDto);
 		    // 게시글 등록
 		    boardDao.writeBoard(boardDto);
@@ -99,6 +59,7 @@ public class BoardController {
 		//게시판 리스트 페이지
 		@RequestMapping(value = "/board", method = RequestMethod.GET)
 		public String board(Model model) {
+			
 				List<BoardDto> boardDtoList = boardDao.selectBoard();
 				// json 형식으로 변환
 				ObjectMapper objectMapper = new ObjectMapper();

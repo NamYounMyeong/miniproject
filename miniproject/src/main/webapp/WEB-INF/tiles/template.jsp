@@ -18,15 +18,17 @@
         #body{
             float:left;
             width:90%;
+            height:90%;
+            overflow:auto;
         }
-       /*  #footer{
+       /*   #footer{
             width: 100%;
             height: 50px;            
             text-align: center;
             background-color: orange;
             clear:both;
         } */
-         #left, #body{ 
+         #left{ 
                min-height: 600px;
          } 
     </style>
@@ -37,7 +39,7 @@
     <div id="header"><tiles:insertAttribute name="header" /></div>
     <div id="left"><tiles:insertAttribute name="left" /></div>
     <div id="body"><tiles:insertAttribute name="body" /></div>    
-    <%-- <div id="footer"><tiles:insertAttribute name="footer" /></div> --%>
+    <%-- <div id="footer"><tiles:insertAttribute name="footer" /></div> --%> 
     </div>
 </body>
 </html>
