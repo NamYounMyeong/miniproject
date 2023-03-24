@@ -15,22 +15,36 @@
 	</select>
 	
 	<!-- 댓글 목록 조회 -->
+	<!-- 20개씩 잘라 오도록 조회 (현재는 1-20까지 임의로 값을 줬지만 변수 값으로 조회 하도록 수정 예정) -->
 	<select id="selectReplyList" resultType="ReplyDto" parameterType="int">
-	  SELECT
-              cmnt_no,
-              cmnt_wrt_nm,
-              cmnt_wrt_ymd,
-              cmnt_mdfcn_ymd,
-              cmnt_wrt_cn,
-              cmnt_pstg_no,
-              cmnt_parent,
-              cmnt_group,
-              cmnt_depth
-        FROM  cmnt 
-       WHERE cmnt_pstg_no = #{cmntPstgNo}
-     CONNECT BY PRIOR cmnt_no = cmnt_parent 
-       START WITH cmnt_parent IS null 
-       ORDER SIBLINGS BY cmnt_group asc, cmnt_no asc
+	  SELECT 
+	         * 
+	    FROM 
+	         (
+              SELECT 
+                     TMP.*, 
+                     rownum RN 
+                FROM 
+                    (
+	                 SELECT
+                            cmnt_no,
+                            cmnt_wrt_nm,
+                            cmnt_wrt_ymd,
+                            cmnt_mdfcn_ymd,
+                            cmnt_wrt_cn,
+                            cmnt_pstg_no,
+                            cmnt_parent,
+                            cmnt_group,
+                            cmnt_depth
+                      FROM  cmnt 
+                     WHERE  cmnt_pstg_no = #{cmntPstgNo}
+                   CONNECT BY PRIOR cmnt_no = cmnt_parent 
+                     START WITH cmnt_parent IS null 
+                     ORDER SIBLINGS BY cmnt_group asc, cmnt_no asc
+                    )
+                       TMP
+                    ) 
+                     WHERE  RN BETWEEN 1 AND 20
 	</select>
 	
 	<!-- 첨부파일 목록 조회 -->
