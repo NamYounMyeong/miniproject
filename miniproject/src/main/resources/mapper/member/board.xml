@@ -105,7 +105,7 @@
 	) 
 	  VALUES
 	(
-	  #{cmntNo}, 
+	  cmnt_seq.nextval, 
 	  #{cmntWrtNm}, 
 	  sysdate, 
 	  #{cmntWrtCn}, 
@@ -113,7 +113,14 @@
 	  <if test="cmntParent != ''">
 	  #{cmntParent},
 	  </if>
+	  <choose>
+	  <when test="cmntGroup != 0">
 	  #{cmntGroup},
+	  </when>
+	  <otherwise>
+	  cmnt_seq.nextval,
+	  </otherwise>
+	  </choose>
 	  #{cmntDepth}
 	)
 	</insert>

@@ -72,8 +72,6 @@
 				<input name="cmntWrtNm" value="${sessionScope.loginId}" type="hidden"/>
 				<input name="cmntPstgNo" value="${boardDetail.boardDto.pstgNo}" type="hidden"/>
 				<input name="cmntParent" value="null" type="hidden"/>
-				<input name="cmntNo" value="${replyNo}" type="hidden"/>
-<!-- 				<input name="cmntGroup" value="" type="hidden"/> -->
 				<button type="button" class="reply-write-btn">작성</button>
 			</c:otherwise>
 			</c:choose>
@@ -86,15 +84,13 @@
 					<span class="reply-id">작성자 ${replyList.cmntWrtNm}</span>
 				</div>
 				<div>
-					<span class="reply-content">
 						<c:if test="${replyList.cmntDepth > 0}">
 							<c:forEach var="depth" begin="1" end="${replyList.cmntDepth}" step="1">
 								<span>&nbsp</span>
 							</c:forEach>
-							<span>RE:</span>
+							<span>RE: &nbsp</span>
 						</c:if>
-						${replyList.cmntWrtCn}
-					</span>
+					<span class="reply-content">${replyList.cmntWrtCn}</span>
 				</div>
 				<div>
 					<c:choose>
