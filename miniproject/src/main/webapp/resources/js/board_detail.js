@@ -1,4 +1,5 @@
 $(function(){
+		/* 현재 페이지의 게시물 번호를 전역 변수로 선언  */
 		var cmntPstgNo = $("[name=cmntPstgNo]").val();
 		
 		/* 댓글 작성 */
@@ -9,15 +10,15 @@ $(function(){
 			var cmntDepth = 0;
 			
 			//댓글 번호 생성
-			var cmntNo =  $("[name=cmntNo]").val();
+//			var cmntNo =  $("[name=cmntNo]").val();
 			
 			var data = {
-					"cmntNo" : cmntNo,
+//					"cmntNo" : cmntNo,
 					"cmntWrtCn" : cmntWrtCn,
 					"cmntWrtNm" : cmntWrtNm,
 					"cmntPstgNo" : cmntPstgNo,
-					"cmntParent" : null, //널이란 글자 넘기기 안됨.
-					"cmntGroup" : cmntNo,
+//					"cmntParent" : null, //널이란 글자 넘기기 안됨.
+//					"cmntGroup" : cmntNo,
 					"cmntDepth" : cmntDepth
 			};
 			$.ajax({
@@ -62,7 +63,7 @@ $(function(){
 							/* 버튼 추가 */
 							var div4 = $('<div>').addClass("reply-btn-container").append(reReplyBtn).append(replyUpdateBtn).append(replyDeleteBtn);
 							replyBox.last().append(div4);
-							console.log(resp.length);
+//							console.log(resp.length);
 							if(resp.length == 1) {
 								$(".reply-box-container").append(replyBox);
 							}
@@ -165,8 +166,10 @@ $(function(){
 		/* 대댓글 작성 완료 */
 		$(document).on("click", ".write-complete-btn", function() {
 //			$(this).css("background-color", "red");
-			var textarea = $(this).prev("textarea");
-			var replyBtnContainer = $(this).parents(".reply-box").find(".reply-btn-container");
+			var thisBtn = $(this);
+			var textarea = thisBtn.prev("textarea");
+			var replyBtnContainer = thisBtn.parents(".reply-box").find(".reply-btn-container");
+			var thisBox = thisBtn.parents(".reply-box");
 			
 			//수정, 삭제 버튼 생성
 			var reReplyBtn = $("<button>").addClass("reply-delete-btn").text("댓글 쓰기");
@@ -174,21 +177,21 @@ $(function(){
 			var replyDeleteBtn = $("<button>").addClass("reply-delete-btn").text("삭제");
 			
 			//작성 완료시 넘길 데이터 값
-			var cmntNo = $("[name=cmntNo]").val();
+//			var cmntNo = $("[name=cmntNo]").val();
 			var cmntWrtCn = textarea.val();
 			var cmntWrtNm = $("[name=cmntWrtNm]").val();
-			var cmntParent = $(this).parents(".reply-box").find("[name=replyCmntNo]").val();
-			var cmntGroup = $("[name=replyCmntGroup]").val();
-			var cmntDepth = $(this).parents(".reply-box").find("[name=replyCmntDepth]").val();
+			var cmntParent = thisBtn.parents(".reply-box").find("[name=replyCmntNo]").val();
+			var cmntGroup = thisBtn.parents(".reply-box").find("[name=replyCmntGroup]").val();
+			var cmntDepth = thisBtn.parents(".reply-box").find("[name=replyCmntDepth]").val();
 			
 			cmntDepth = Number(cmntDepth)+1; 
 			console.log(cmntDepth);
 			
 			//댓글 번호 생성
-			var cmntNo =  $("[name=cmntNo]").val();
+//			var cmntNo =  $("[name=cmntNo]").val();
 			
 			var data = {
-						"cmntNo" : cmntNo,
+//						"cmntNo" : cmntNo,
 						"cmntWrtCn" : cmntWrtCn,
 						"cmntWrtNm" : cmntWrtNm,
 						"cmntPstgNo" : cmntPstgNo,
@@ -203,6 +206,48 @@ $(function(){
 				contentType: "application/json",
 				data: JSON.stringify(data), 
 				success: function(resp){
+					
+					$.ajax({
+						url: root+'/rest/board/reply-list',
+						method: 'GET',
+						data: {pstgNo:cmntPstgNo},
+						success: function(resp) {
+							var replyBox = $('<div>').addClass("reply-box");
+							
+							/* 댓글 내용 */
+							var replyContent = textarea.val();
+							/* 작성한 사람 */
+							var replyId = $("<span>").text(resp[resp.length-1].cmntWrtNm).addClass("reply-id");
+							/* 작성일 */
+							var date = moment(resp[resp.length-1].cmntWrtYmd).format("YYYY-MM-DD HH:mm");
+							/* 댓글 번호 */
+							var cmntNo = resp[resp.length-1].cmntNo;
+							
+							var replyDate = $("<span>").text(date).addClass("reply-date");
+							var replyUpdateBtn = $("<button>").text("수정").addClass("reply-update-btn");
+							var replyDeleteBtn = $("<button>").text("삭제").addClass("reply-delete-btn");
+							var reReplyBtn = $("<button>").text("댓글 달기").addClass("re-reply-btn");
+							
+							/* 비동기 댓글 작성시 태그 추가 */
+							/* 작성자 추가 */
+							var div = $('<div>').append(replyId);
+							replyBox.append(div);
+							/* 댓글 내용 추가 */
+							var div2 = $('<div>').append(replyContent);
+							replyBox.last().append(div2);
+							/* 작성일 추가 */
+							var div3 = $('<div>').append(replyDate).append($("<input>").val(cmntNo).attr("type","hidden"));
+							replyBox.last().append(div3);
+							/* 버튼 추가 */
+							var div4 = $('<div>').addClass("reply-btn-container").append(reReplyBtn).append(replyUpdateBtn).append(replyDeleteBtn);
+							
+							replyBox.last().append(div4);
+							thisBox.last().after(replyBox);
+							textarea.remove();
+							thisBtn.remove();
+							
+						}
+					});//ajax end
 					
 					console.log("등록 성공");
 					
