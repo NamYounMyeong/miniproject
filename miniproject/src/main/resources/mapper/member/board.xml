@@ -3,7 +3,7 @@
 <mapper namespace="board">
 	<!-- 게시글 단일 조회 -->
 	<select id="detail" parameterType="int" resultMap="boardDetail">
-	  SELECT 	
+	 SELECT 	
 		      pstg_no, 
 		      pstg_wrt_id, 
 		      pstg_wrt_title, 
@@ -12,7 +12,7 @@
 		      pstg_inq_cnt 
 		FROM  pstg
 	   WHERE  pstg_no = #{pstgNo}
-	</select>
+ 	 </select>
 	
 	<!-- 댓글 목록 조회 -->
 	<!-- 20개씩 잘라 오도록 조회 (현재는 1-20까지 임의로 값을 줬지만 변수 값으로 조회 하도록 수정 예정) -->
@@ -52,13 +52,12 @@
 	   SELECT 
 	           A.atch_no, 
 	           A.atch_extn_nm, 
-	           A.atch_file_nm, 
-	           A.atch_file_sz, 
-	           A.atch_strg_ymd 
+	           A.atch_file_nm
 	     FROM  atch A LEFT OUTER JOIN pstg_img B 
 	       ON  A.atch_no = B.pstg_img_atch_no 
 	    WHERE  B.pstg_img_pstg_no = #{pstgNo}
 	</select>
+
 	
 	<!-- 댓글 리스트 계층형 조회 -->
 	<resultMap type="BoardDetailVO" id="boardDetail">
@@ -164,7 +163,9 @@
 	
 	<!-- 게시글 조회수 증가 -->
 	<update id="viewCount" parameterType="int">
-   	  UPDATE pstg SET pstg_inq_cnt = pstg_inq_cnt + 1 WHERE pstg_no = #{pstgNo}
+   	   UPDATE pstg
+   	   SET pstg_inq_cnt = pstg_inq_cnt + 1 
+   	   WHERE pstg_no = #{pstgNo}
 	</update>
 
 	<!-- 수정 -->
@@ -208,12 +209,14 @@
 	<select id="selectReplyListToBoard" parameterType="int" resultType="BoardDto">
 	  SELECT *
 	  FROM pstg
-	  START WITH pstg_no = #{pstgParent} <!-- 시작조건 -->
-	  CONNECT BY PRIOR pstg_group = pstg_parent <!-- 계층 구조 연결 -->
-	  ORDER SIBLINGS BY pstg_group DESC, pstg_parent ASC <!-- 자식글 정렬 -->
+	  START WITH pstg_no = #{pstgParent} <!-- START WITH [시작조건] -->
+	  CONNECT BY PRIOR pstg_group = pstg_parent <!-- CONNECT BY [부모]=[자식] 계층 구조 연결 -->
+	  ORDER SIBLINGS BY pstg_group DESC, pstg_parent ASC <!-- ORDER SIBLINGS:(계층형 쿼리 정렬) 자식글 정렬 -->
 	</select>
 	
 	<!-- 게시글 등록 -->
+	
+	<!-- 게시글 -->
 	<insert id="writeBoard" parameterType="BoardDto">
     <selectKey keyProperty="pstgNo" resultType="int" order="BEFORE">
         SELECT pstg_seq.nextval FROM dual
@@ -227,14 +230,45 @@
         pstg_depth,
         pstg_wrt_ymd
     ) VALUES (
-        pstg_seq.nextval,
+        #{pstgNo},
         #{pstgWrtId},
         #{pstgWrtTitle},
         #{pstgWrtCn},
         #{pstgGroup},
-		#{pstgDepth},        
+        #{pstgDepth},
         sysdate
     )
-	</insert>
+</insert>
+<!-- 첨부파일 첨부 -->
+<insert id="insertAttachment" parameterType="AttachmentDto">
+    <selectKey keyProperty="atchNo" resultType="int" order="BEFORE">
+        SELECT atch_seq.nextval FROM dual
+    </selectKey>
+    INSERT INTO atch (
+        atch_no, 
+        atch_extn_nm, 
+        atch_file_nm,
+        atch_file_sz,
+        atch_strg_ymd
+    )
+    VALUES (
+        atch_seq.nextval, 
+        #{atchExtnNm}, 
+        #{atchFileNm},
+        #{atchFileSz},
+        sysdate
+    )
+</insert>
+<!-- 게시글&첨부파일 연결 -->
+<insert id="insertPstgImg" parameterType="Map">
+        INSERT INTO pstg_img (
+            pstg_img_pstg_no, 
+            pstg_img_atch_no
+        )
+        VALUES (
+            #{pstgNo}, 
+            #{atchNo}
+        )
+</insert>
 	
 </mapper>

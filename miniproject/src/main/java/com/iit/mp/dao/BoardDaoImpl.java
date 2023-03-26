@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.iit.mp.dto.AttachmentDto;
 import com.iit.mp.dto.BoardDto;
 import com.iit.mp.dto.ReplyDto;
 import com.iit.mp.vo.BoardDetailVO;
@@ -25,7 +26,8 @@ public class BoardDaoImpl implements BoardDao {
 	//게시글 상세페이지
 	@Override
 	public BoardDetailVO boardDetail(int pstgNo) {
-		return sqlSession.selectOne("board.detail", pstgNo); 
+	    BoardDetailVO board = sqlSession.selectOne("board.detail", pstgNo);
+	    return board;
 	}
 	
 	//댓글 번호 생성
@@ -33,7 +35,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int replyNo() {
 		return sqlSession.selectOne("board.replyNo");
 	}
-	
+
 	//댓글 등록
 	@Override
 	public void replyWrite(ReplyDto replyDto) {
@@ -60,16 +62,22 @@ public class BoardDaoImpl implements BoardDao {
 		return result > 0;
 	}
 	
-	//게시판 글쓰기
-		@Override
-		public void writeBoard(BoardDto boardDto) {
-			sqlSession.insert("board.writeBoard", boardDto);
-			 if (boardDto.getAttachments() != null) {
-			        sqlSession.insert("insertAttachments", boardDto.getAttachments());
-			        sqlSession.insert("insertAttachmentMapping", boardDto.getAttachments());
-			 }
-		}
+	//게시글 쓰기
+	@Override
+	public void writeBoard(BoardDto boardDto, AttachmentDto attachmentDto) {
+		//게시글 내용 insert
+	    sqlSession.insert("board.writeBoard", boardDto);
 
+	    //첨부파일 내용 insert
+	    sqlSession.insert("insertAttachment", attachmentDto);
+
+	    // 게시글 테이블과 첨부파일 연결 insert
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("pstgNo", boardDto.getPstgNo());
+	    map.put("atchNo", attachmentDto.getAtchNo());
+	    sqlSession.insert("insertPstgImg", map);
+	}
+	
 	// 게시판 리스트 조회
 	@Override
 	public List<BoardDto> selectBoard() {
@@ -106,7 +114,7 @@ public class BoardDaoImpl implements BoardDao {
 	public void increaseViewCount(int pstgNo) {
 		sqlSession.update("board.viewCount", pstgNo);
 	}
-
+	
 	// 게시글 답변등록
 	@Override
 	public void insertReplyWrite(BoardDto boardDto) {
@@ -118,5 +126,6 @@ public class BoardDaoImpl implements BoardDao {
 	public List<BoardDto> selectReplyList(int pstgParent) {
 		return sqlSession.selectList("board.selectReplyListToBoard", pstgParent);
 	}
+
 	
 }
