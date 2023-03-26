@@ -39,27 +39,26 @@
 				<div>${boardDetail.boardDto.pstgWrtCn}</div>
 			</div>
 		</div>
-	<div class="detail-bottom-area">
-    <div>
-        <div>
-            첨부파일 목록
-            <c:forEach var="atch" items="${boardDetail.atchList}">
-                <button>${atch.atchFileNm}</button>
-            </c:forEach>
-        </div>
-        <div class="write-time">
-            <c:choose>
-                <c:when test="${boardDetail.boardDto.pstgMdfcnYmd == null}">
-                    <span>작성일: ${boardDetail.boardDto.pstgWrtYmd}</span>
-                </c:when>
-                <c:otherwise>
-                    <span>작성일: ${boardDetail.boardDto.pstgMdfcnYmd} (수정됨)</span>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </div>
-</div>
-
+		<div class="detail-bottom-area">
+			<div>
+				<div>
+					첨부파일 목록
+					<c:forEach var="atchList" items="${boardDetail.atchList}">
+						<button>${atchList.atchFileNm}</button>
+					</c:forEach>
+				</div>
+				<div class="write-time">
+					<c:choose>
+						<c:when test="${boardDetail.boardDto.pstgMdfcnYmd == null}">
+							<span>작성일: ${boardDetail.boardDto.pstgWrtYmd}</span>
+						</c:when>
+						<c:otherwise>
+							<span>작성일: ${boardDetail.boardDto.pstgMdfcnYmd} (수정됨)</span>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="reply-area">
 	
