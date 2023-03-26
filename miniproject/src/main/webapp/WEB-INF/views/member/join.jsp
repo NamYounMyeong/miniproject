@@ -55,6 +55,7 @@
 		<div class="row">
 			<label for="mbrBrdt">생년월일</label>
 			<input class="join-input w-100" id="mbrBrdt" type="date" name="mbrBrdt">
+<%-- 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
 		</div>
 		<div class="join-btn-box">
 			<button class="w-100" id="submit-btn" type="submit">가입하기</button>

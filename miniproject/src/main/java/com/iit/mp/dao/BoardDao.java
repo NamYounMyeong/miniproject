@@ -1,7 +1,6 @@
 package com.iit.mp.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.iit.mp.dto.AttachmentDto;
 import com.iit.mp.dto.BoardDto;
@@ -13,6 +12,8 @@ public interface BoardDao {
 	//게시글 상세페이지
 	BoardDetailVO boardDetail(int pstgNo);
 	
+	//댓글 번호 생성
+	int replyNo();
 	//댓글 등록
 	void replyWrite(ReplyDto replyDto);
 	

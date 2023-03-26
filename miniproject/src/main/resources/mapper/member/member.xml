@@ -22,14 +22,14 @@
 	<insert id="memberJoin" parameterType="MemberDto">
 	  INSERT into mbr
 	(
-	  mbr_id,
-	  mbr_pw,
-	  mbr_nm,
-	  mbr_mbl_telno,
-	  mbr_home_addr,
-	  mbr_home_daddr,
-	  mbr_brdt,
-	  mbr_reg_ymd
+	  mbr_id,  <!-- 아이디 -->
+	  mbr_pw,  <!-- 비밀번호 -->
+	  mbr_nm,  <!-- 이름 -->
+	  mbr_mbl_telno,  <!-- 휴대폰 번호 -->
+	  mbr_home_addr,  <!-- 주소 -->
+	  mbr_home_daddr,  <!-- 상세주소 -->
+	  mbr_brdt,  <!-- 생년월일 -->
+	  mbr_reg_ymd  <!-- 가입일 -->
 	)
 	  VALUES
 	(
@@ -46,10 +46,13 @@
 	
 	<!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="MemberDto">
+<!-- 	<select id="login" parameterType="String" resultType="UserVO"> -->
 	  SELECT
-	          mbr_id,
-	          mbr_pw,
-	          mbr_grd
+	          mbr_id,  <!-- 아이디 -->
+	          mbr_pw,  <!-- 비밀번호 -->
+	          mbr_nm,  <!-- 이름 -->
+	          mbr_authority,  <!-- 유저 권한 -->
+	          mbr_enabled  <!-- 자동로그인 유/무 -->
 	    FROM  mbr
 	   WHERE  mbr_id = #{mbrId}
 	</select>

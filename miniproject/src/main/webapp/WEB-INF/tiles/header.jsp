@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div>
-		<a id="main_logo" href="/mp"><img src="${path}/resources/img/logo.jpg" style="width:150px;"></a>
+		<a id="main_logo" href="/"><img src="${path}/resources/img/logo.jpg" style="width:150px;"></a>
 	</div>
 	
 </body>
