@@ -12,12 +12,16 @@
 <body>
 <div class="container-300 screen-center">
 	<div>
-	<form action="login" method="post">
+	<form action="/login" method="post">
 		<div class="row">
 			<input class="w-100 login-input" name="mbrId" type="text" placeholder="아이디 입력">
 		</div>
 		<div class="row">
 			<input class="w-100 login-input" name="mbrPw" type="password" placeholder="비밀번호 입력">
+		</div>
+		<div>
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+<!-- 		    <input name="remember-me" type="checkbox" />자동 로그인 -->
 		</div>
 		<div class="row login-btn-box">
 			<button class="w-100" type="submit">로그인</button>

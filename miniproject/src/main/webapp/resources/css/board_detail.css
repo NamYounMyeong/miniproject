@@ -74,6 +74,7 @@
 	flex-direction: column;
 	border: 1px solid #e6e6e6;
 	margin-top: 5px;
+	padding: 5px;
 }
 
 textarea {
@@ -115,4 +116,13 @@ textarea {
 .board-title > span:NTH-CHILD(1) {
 	border-right: 1px solid #000000;
 }
+
+.reply-box > div:NTH-CHILD(1),
+.reply-box > div:NTH-CHILD(3),
+.reply-box > div:NTH-CHILD(4) {
+	justify-content: flex-end;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+
 

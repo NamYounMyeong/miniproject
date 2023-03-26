@@ -1,7 +1,7 @@
 package com.iit.mp.dao;
 
 import com.iit.mp.dto.MemberDto;
-import com.iit.mp.security.PrincipalDetails;
+import com.iit.mp.vo.UserVO;
 
 public interface MemberDao {
 
@@ -13,6 +13,6 @@ public interface MemberDao {
 	void memberJoin(MemberDto memberDto);
 	/* 로그인 */
 	MemberDto loginMember(String mbrId);
-//	PrincipalDetails loginMember(String mbrId);
+//	UserVO loginMember(String mbrId);
 	
 }

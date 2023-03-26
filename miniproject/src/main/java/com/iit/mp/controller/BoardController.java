@@ -27,21 +27,17 @@ public class BoardController {
 		return "board/write";
 	}
 	
-	//임시 게시판 리스트 페이지
-	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public String boardList(){
-		
-		return "board/list";
-	}
-	
 	//게시글 상세페이지
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public String boardDetail2(@RequestParam int pstgNo, Model model){
+	public String detail(@RequestParam int pstgNo, Model model){
 		//조회수 증가
 	    if (pstgNo != 0) {
 	        boardDao.increaseViewCount(pstgNo);
 	    }
+	    
 		model.addAttribute("boardDetail", boardDao.boardDetail(pstgNo));
+		model.addAttribute("replyNo", boardDao.replyNo());
+		
 		return "board/detail";
 	}
 	

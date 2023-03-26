@@ -29,7 +29,7 @@ public class BoardRestController {
 //		return boardDao.detailView(Integer.parseInt(pstgNo));
 //	}
 	
-	//게시글 상세페이지
+	//댓글 작성
 	@RequestMapping(value = "reply-write", method = RequestMethod.POST)
 	public void replyWrite(@RequestBody ReplyDto replyDto) {
 		boardDao.replyWrite(replyDto);
