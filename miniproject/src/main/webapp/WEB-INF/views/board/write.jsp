@@ -23,8 +23,8 @@
 			<div id="inputcontent">
 				<div id="inputmain">
 					<h1>게시글 작성</h1>
-					<!-- <form method="POST" action="insert" enctype="multipart/form-data"> -->
-					<form method="POST" action="insert">
+					<form method="POST" action="insert" enctype="multipart/form-data">
+					<!-- <form method="POST" action="insert"> -->
 						<table>
 							<tr>
 								<th>제목</th>
@@ -38,11 +38,11 @@
 								<input type="hidden" name="pstgWrtId" value="${sessionScope.loginId}" />
 								</td>
 							</tr>
-							<!-- <tr>
+							<tr>
 								<th>첨부파일</th>
-								<td><input type="file" name="attach"
+								<td><input type="file" name="files" multiple="multiple"
 									style="width: 580px; height: 20px" /></td>
-							</tr>  -->
+							</tr> 
 							<tr> 
 								<th>글내용</th>
 								<td><textarea id="mytextarea" name="pstgWrtCn" style="height: 400px;" placeholder="내용을 작성 해주세요."></textarea></td>
