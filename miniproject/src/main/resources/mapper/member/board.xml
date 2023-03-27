@@ -215,8 +215,6 @@
 	</select>
 	
 	<!-- 게시글 등록 -->
-	
-	<!-- 게시글 -->
 	<insert id="writeBoard" parameterType="BoardDto">
     <selectKey keyProperty="pstgNo" resultType="int" order="BEFORE">
         SELECT pstg_seq.nextval FROM dual
@@ -238,37 +236,37 @@
         #{pstgDepth},
         sysdate
     )
-</insert>
-<!-- 첨부파일 첨부 -->
-<insert id="insertAttachment" parameterType="AttachmentDto">
-    <selectKey keyProperty="atchNo" resultType="int" order="BEFORE">
-        SELECT atch_seq.nextval FROM dual
-    </selectKey>
-    INSERT INTO atch (
-        atch_no, 
-        atch_extn_nm, 
-        atch_file_nm,
-        atch_file_sz,
-        atch_strg_ymd
-    )
-    VALUES (
-        atch_seq.nextval, 
-        #{atchExtnNm}, 
-        #{atchFileNm},
-        #{atchFileSz},
-        sysdate
-    )
-</insert>
-<!-- 게시글&첨부파일 연결 -->
-<insert id="insertPstgImg" parameterType="Map">
-        INSERT INTO pstg_img (
-            pstg_img_pstg_no, 
-            pstg_img_atch_no
-        )
-        VALUES (
-            #{pstgNo}, 
-            #{atchNo}
-        )
-</insert>
+	</insert>
+	<!-- 첨부파일 첨부 -->
+	<insert id="insertAttachment" parameterType="AttachmentDto">
+	    <selectKey keyProperty="atchNo" resultType="int" order="BEFORE">
+	        SELECT atch_seq.nextval FROM dual
+	    </selectKey>
+	    INSERT INTO atch (
+	        atch_no, 
+	        atch_extn_nm, 
+	        atch_file_nm,
+	        atch_file_sz,
+	        atch_strg_ymd
+	    )
+	    VALUES (
+	        atch_seq.nextval, 
+	        #{atchExtnNm}, 
+	        #{atchFileNm},
+	        #{atchFileSz},
+	        sysdate
+	    )
+	</insert>
+	<!-- 게시글&첨부파일 연결 -->
+	<insert id="insertPstgImg" parameterType="Map">
+	        INSERT INTO pstg_img (
+	            pstg_img_pstg_no, 
+	            pstg_img_atch_no
+	        )
+	        VALUES (
+	            #{pstgNo}, 
+	            #{atchNo}
+	        )
+	</insert>
 	
 </mapper>

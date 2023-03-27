@@ -25,7 +25,7 @@ public class LoginController {
 //	private CustomUserDetailsService customUserDetailsService;
 	
 	/* 로그인 */
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String loginPage(){
 		return "login";
 	}

@@ -89,7 +89,7 @@ public class BoardController {
 	            board.setAttachments(attachments);
 
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	            e.printStackTrace(); // 개발 용도로 사용
 	        }
 	    }
 
@@ -105,14 +105,15 @@ public class BoardController {
 			
 				List<BoardDto> boardDtoList = boardDao.selectBoard();
 				// json 형식으로 변환
-				ObjectMapper objectMapper = new ObjectMapper();
+				ObjectMapper objectMapper = new ObjectMapper(); //ObjectMapper 클래스를 사용하여 객체를 JSON 문자열로 변환
 				String json = "";
-				try {
+				try { //변환 중 오류가 발생하면 예외 처리
 					json = objectMapper.writeValueAsString(boardDtoList);
 				} catch (JsonProcessingException e) {
-					e.printStackTrace();
+					e.printStackTrace(); 
+					
 				}
-				model.addAttribute("boards", json);
+				model.addAttribute("boards", json);//Model 객체에 JSON,"boards" 문자열을 추가
 
 				return "board/board";
 			}
