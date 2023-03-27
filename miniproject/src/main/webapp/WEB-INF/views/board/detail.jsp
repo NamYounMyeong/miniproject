@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -12,11 +13,12 @@
 <body>
 	<div class="detail-view container-1000">
 		<div class="detail-top-area">
-			<!-- <a href="list">목록으로</a> -->
-			<input type="button" id="boardList_button" value="목록보기" style="height:25px" />
+		<input type="button" id="boardList_button" value="목록보기" style="height:25px" />
+		<c:if test="${not empty sessionScope.loginId and sessionScope.loginId eq boardDetail.boardDto.pstgWrtId}">
 			<input type="button" id="update_button" value="편집" style="height:25px" />
 		    <input type="button" id="delete_button" value="삭제" style="height:25px" />
-		    <input type="button" id="reply_button" value="답글쓰기" style="height:25px" />
+		    </c:if>
+		<input type="button" id="reply_button" value="답글쓰기" style="height:25px" />	
 		</div>
 		<div class="detail-middle-area">
 			<div class="title-box">

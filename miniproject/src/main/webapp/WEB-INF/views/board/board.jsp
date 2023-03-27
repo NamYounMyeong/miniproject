@@ -54,12 +54,12 @@
 	                if(!value) return "";
 			  		
 	                // 답글인 경우 제목 앞에 'Re:'를 붙임
-	                /* var reply = item.pstgGroup > 1 ? "&nbsp;ㄴRe: " : ""; */
+	                //repeat() 메서드는 문자열을 주어진 횟수만큼 반복해 붙인 새로운 문자열을 반환
 	                var reply = item.pstgGroup > 0 ? "&nbsp;ㄴ:" + "Re:".repeat(item.pstgGroup) + "" : "";
 
 			  
 					var template = '<div class="my_div">';
-					template += '<a href="detail?pstgNo=' + item.pstgNo + '">' + reply + value + '</a>';
+					template += '<a href="detail?pstgNo=' + item.pstgNo + '">' + reply + value + '</a>'; 
 					template += '</div>';
 					return template; // HTML 템플릿 반환..그대도 innerHTML 속성값으로 처리됨
 			},
@@ -102,14 +102,15 @@
 
 <body>
  
-<div  id="" class="wrap">
-<h1 style="text-align:center; position:relative; top:95px;">게 시 판 목 록</h1>
-	<div class="form-wrap" style="display:flex; justify-content: center;">
-		<div id="grid_wrap" style="width:1200px;height:480px;margin-top:150px;"><a href="write">
-			<button style="margin-bottom:10px;float:right;">글쓰기</button></a>
+	<div  id="" class="wrap">
+	<h1 style="text-align:center; position:relative; top:95px;">게 시 판 목 록</h1>
+		<div class="form-wrap" style="display:flex; justify-content: center;">
+		
+			<div id="grid_wrap" style="width:1200px;height:480px;margin-top:150px;"><a href="write">
+				<button style="margin-bottom:10px;float:right;">글쓰기</button></a>
+			</div>
 		</div>
 	</div>
-</div>
 	
 </body>
 </html>

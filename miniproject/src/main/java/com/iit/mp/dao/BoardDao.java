@@ -46,6 +46,9 @@ public interface BoardDao {
 	
 	//게시글 리스트 조회
 	List<BoardDto> selectBoard();
+	
+	//게시글 첨부파일 리스트
+	List<AttachmentDto> atchList(int pstgNo);
 
 
 }
