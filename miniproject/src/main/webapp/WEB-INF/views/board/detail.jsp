@@ -44,9 +44,9 @@
 		<div class="detail-bottom-area">
 			<div>
 				<div>
-					첨부파일 목록
+					첨부파일 목록 
 					<c:forEach var="atchList" items="${boardDetail.atchList}">
-						<button>${atchList.atchFileNm}</button>
+						<a href="download?atchNo=${atchList.atchNo}" id="attachment-btn">${atchList.atchExtnNm}</a>
 					</c:forEach>
 				</div>
 				<div class="write-time">
@@ -154,6 +154,7 @@
 			location.href = 'edit?pstgNo=${boardDetail.boardDto.pstgNo}';
 		});
 	});
+	
 	</script>
 </body>
 </html>

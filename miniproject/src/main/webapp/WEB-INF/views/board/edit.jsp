@@ -24,7 +24,7 @@
 				<div id="inputmain">
 					<h1>게시글 수정</h1>
 					<!-- <form method="post" action="insert" enctype="multipart/form-data"> -->
-					<form method="POST" action="edit">
+					<form method="POST" action="edit" enctype="multipart/form-data">
 					<input type="hidden" name="pstgNo" value="${ boardDetail.boardDto.pstgNo }">
 						<table>
 							<tr>
@@ -39,11 +39,11 @@
 								<input type="hidden" name="pstgWrtId">
 								</td>
 							</tr>
-							<!-- <tr>
+							<tr>
 								<th>첨부파일</th>
 								<td><input type="file" name="attach"
 									style="width: 580px; height: 20px" /></td>
-							</tr> -->
+							</tr>
 							<tr>
 								<th>글내용</th>
 								<td><textarea id="mytextarea" name="pstgWrtCn" style="height: 400px;" placeholder="내용을 작성 해주세요.">${boardDetail.boardDto.pstgWrtCn}</textarea></td>

@@ -30,6 +30,7 @@ public class BoardDaoImpl implements BoardDao {
 	    return board;
 	}
 	
+	
 	//댓글 번호 생성
 	@Override
 	public int replyNo() {
@@ -126,11 +127,19 @@ public class BoardDaoImpl implements BoardDao {
 	public List<BoardDto> selectReplyList(int pstgParent) {
 		return sqlSession.selectList("board.selectReplyListToBoard", pstgParent);
 	}
-	
-	//첨부파일 리스트 업데이트
+
+	//첨부파일 조회
 	@Override
 	public List<AttachmentDto> atchList(int pstgNo) {
 		return sqlSession.selectList("board.selectAtchList", pstgNo);
 	}
 	
+	// 첨부파일 다운로드
+	@Override
+	public AttachmentDto selectAttachment(int atchNo) {
+	    return sqlSession.selectOne("board.selectAttachment", atchNo);
+	}
+
+	
+		
 }

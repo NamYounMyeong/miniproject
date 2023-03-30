@@ -14,6 +14,7 @@ public interface BoardDao {
 	
 	//댓글 번호 생성
 	int replyNo();
+	
 	//댓글 등록
 	void replyWrite(ReplyDto replyDto);
 	
@@ -47,8 +48,10 @@ public interface BoardDao {
 	//게시글 리스트 조회
 	List<BoardDto> selectBoard();
 	
-	//게시글 첨부파일 리스트
+	//첨부파일조회
 	List<AttachmentDto> atchList(int pstgNo);
 
+	//첨부파일 다운로드
+	AttachmentDto selectAttachment(int atchNo);
 
 }
