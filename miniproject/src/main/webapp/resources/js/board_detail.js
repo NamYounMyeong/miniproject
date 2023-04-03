@@ -230,10 +230,10 @@ $(function(){
 							
 							/* 비동기 댓글 작성시 태그 추가 */
 							/* 작성자 추가 */
-							var div = $('<div>').append(replyId);
+							var div = $('<div>').append("작성자 "+replyId);
 							replyBox.append(div);
 							/* 댓글 내용 추가 */
-							var div2 = $('<div>').append(replyContent);
+							var div2 = $('<div>').append("RE: "+replyContent);
 							replyBox.last().append(div2);
 							/* 작성일 추가 */
 							var div3 = $('<div>').append(replyDate).append($("<input>").val(cmntNo).attr("type","hidden"));
